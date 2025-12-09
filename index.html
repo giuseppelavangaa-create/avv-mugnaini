@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
@@ -266,6 +266,14 @@
         flex-direction: column;
         align-items: flex-start;
       }
+
+      /* Evita che lo slogan si sovrapponga all'immagine su mobile */
+      #elegant-slogan {
+        margin: 18px auto 22px;
+        padding: 6px 18px 0;
+        font-size: 26px;
+        line-height: 1.3;
+      }
     }
 
     .btn-primary {
@@ -350,11 +358,16 @@
 
     #chi-sono {
       padding: 72px 20px 80px;
+      background: #f7f5f0;
     }
 
     #chi-sono .section-inner {
       max-width: 1120px;
       margin: 0 auto;
+      padding: 28px 26px 32px;
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 18px 52px rgba(0, 0, 0, 0.06);
     }
 
     .section-profile-title {
@@ -362,20 +375,61 @@
     }
 
     .profile-layout {
-      background: #ffffff;
-      border-radius: 26px;
-      padding: 30px 30px 32px;
+      padding: 8px 4px;
       display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.05fr);
-      gap: 34px;
-      box-shadow: 0 22px 60px rgba(12, 37, 20, 0.14);
-      border: 1px solid rgba(0, 0, 0, 0.03);
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .profile-main {
+      position: relative;
+      padding: 16px 18px 12px;
+      background: linear-gradient(180deg, #fbfaf7 0%, #ffffff 100%);
+      border-radius: 22px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.04);
+    }
+
+    .profile-scroll-hint {
+      display: none;
+    }
+
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 12px;
+    }
+
+    .profile-meta {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 6px 14px;
+      font-size: 12px;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
     }
 
     .profile-main-intro {
       font-size: 15px;
-      color: var(--text-soft);
+      color: var(--text-main);
+      margin-bottom: 16px;
+      line-height: 1.75;
+    }
+
+    .profile-comment {
+      background: #ffffff;
+      padding: 14px 16px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-main);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.07);
       margin-bottom: 18px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .theme-chips {
@@ -389,46 +443,92 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: var(--green-soft);
-      color: var(--green-dark);
+      padding: 7px 12px;
+      border-radius: 12px;
+      background: #ffffff;
+      color: var(--text-main);
       font-weight: 700;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
     }
 
-    .profile-comment {
+    .profile-points {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin: 0 0 18px;
+      padding: 0;
+    }
+
+    .profile-points li {
       font-size: 13px;
       color: var(--text-soft);
-      margin-bottom: 18px;
+      line-height: 1.65;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 12px;
+      background: #f9f6ee;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 8px;
+      align-items: start;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    }
+
+    .profile-points li::before {
+      content: "—";
+      color: var(--text-soft);
+      font-weight: 700;
+      margin-top: 1px;
     }
 
     .profile-areas {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px 24px;
+      gap: 12px 16px;
+      margin-top: 2px;
+    }
+
+    .profile-area {
+      border: none;
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: linear-gradient(180deg, #fdfbf7 0%, #ffffff 100%);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
     }
 
     .profile-area h3 {
       font-size: 14px;
       font-weight: 700;
-      color: var(--green-dark);
-      margin-bottom: 4px;
+      color: var(--text-main);
+      margin-bottom: 6px;
     }
 
     .profile-area p {
       font-size: 13px;
       color: var(--text-soft);
+      line-height: 1.6;
     }
 
     .profile-photo-card {
       position: relative;
-      border-radius: 22px;
-      overflow: hidden;
-      background: #d3c3aa;
-      min-height: 260px;
+      border-radius: 24px;
+      overflow: visible;
+      background: none;
+      min-height: 300px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      gap: 12px;
+      border: none;
+      box-shadow: 0 22px 52px rgba(0, 0, 0, 0.12);
+      transform: translateY(60px);
+      opacity: 0;
+      transition: transform 0.55s ease, opacity 0.55s ease;
+    }
+
+    .profile-photo-card.show {
+      transform: translateY(0);
+      opacity: 1;
     }
 
     .profile-photo-card img {
@@ -436,16 +536,20 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 22px;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16);
     }
 
     .profile-photo-overlay {
-      position: absolute;
-      inset: auto 18px 18px 18px;
-      background: rgba(20, 55, 38, 0.94);
-      color: #ffffff;
-      border-radius: 18px;
-      padding: 10px 14px 11px;
+      position: static;
+      margin: 0 6px 4px 6px;
+      background: #ffffff;
+      color: var(--text-main);
+      border-radius: 14px;
+      padding: 12px 14px 12px;
       font-size: 12px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.1);
+      backdrop-filter: none;
     }
 
     .profile-photo-name {
@@ -457,14 +561,24 @@
       font-size: 11px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      opacity: .85;
+      opacity: .75;
       font-weight: 700;
     }
 
     .profile-photo-note {
       margin-top: 4px;
       font-size: 11px;
-      opacity: .9;
+      opacity: .85;
+    }
+
+    @media (min-width: 961px) {
+      .profile-photo-card {
+        height: 100%;
+      }
+
+      .profile-photo-card img {
+        height: 100%;
+      }
     }
 
     @media (max-width: 960px) {
@@ -473,12 +587,22 @@
         padding: 24px 22px 26px;
       }
 
-      .profile-photo-card {
-        max-height: 360px;
+      .profile-header {
+        flex-direction: column;
+        gap: 10px;
       }
 
-      .profile-photo-overlay {
-        inset: auto 14px 14px 14px;
+      .profile-main {
+        max-height: none;
+      }
+
+      .profile-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-photo-card {
+        max-height: none;
+        height: auto;
       }
 
       .profile-areas {
@@ -696,6 +820,14 @@
         font-size: 15px;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .profile-photo-card {
+        transition: none;
+        transform: none;
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
@@ -763,11 +895,12 @@
       <div class="profile-layout">
         <!-- COLONNA TESTO -->
         <div class="profile-main">
+          <div class="profile-scroll-hint">Scorri qui per leggere tutto</div>
           <p class="profile-main-intro">
-            Seguo in particolare le controversie che toccano da vicino la vita delle persone:
-            rapporti familiari, casa, vicinato, beni di famiglia, responsabilità e rapporti
-            con banche e assicurazioni. Sono le materie che, anche secondo le statistiche
-            ufficiali, assorbono la gran parte del contenzioso civile.
+            Seguo le controversie che toccano la vita quotidiana: famiglia, casa, vicinato,
+            beni e responsabilit?. Ambiti che richiedono equilibrio tra relazioni, patrimoni
+            e tempi.
+
           </p>
 
           <div class="theme-chips">
@@ -943,7 +1076,9 @@
     const slogan = document.getElementById('elegant-slogan');
     const sloganSpan = slogan ? slogan.querySelector('span') : null;
     const mqNarrow = window.matchMedia('(max-width: 800px)');
-    const sloganText = '“Chiarezza, competenza e tutela quando ne hai piu bisogno.”';
+    const sloganText = '"Chiarezza, competenza e tutela quando ne hai piu bisogno."';
+    const profileSection = document.getElementById('chi-sono');
+    const profilePhotoCard = document.querySelector('.profile-photo-card');
 
     let typingTimer = null;
     let typedLength = 0;
@@ -990,6 +1125,26 @@
           typingTimer = null;
         }
       }, typeDelay);
+    }
+
+    if (profileSection && profilePhotoCard) {
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && entry.intersectionRatio > 0.18) {
+                profilePhotoCard.classList.add('show');
+              } else {
+                profilePhotoCard.classList.remove('show');
+              }
+            });
+          },
+          { threshold: [0, 0.18, 0.32] }
+        );
+        observer.observe(profileSection);
+      } else {
+        profilePhotoCard.classList.add('show');
+      }
     }
 
     function handleHeroScroll() {
