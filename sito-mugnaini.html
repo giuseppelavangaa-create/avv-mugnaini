@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Avvocato Isabella Mugnaini – Diritto civile e di famiglia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green-dark: #143726;
+      --green: #1f5a3a;
+      --green-soft: #e3f0e4;
+      --sand: #f2e6d3;
+      --bg: #f7f5f0;
+      --text-main: #1f2421;
+      --text-soft: #3f463f;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 72px;
+    }
+
+    body {
+      font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      color: var(--text-main);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(247, 245, 240, 0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-family: "Playfair Display", serif;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--green-dark);
+      text-transform: none;
+      white-space: nowrap;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 14px;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+
+    .main-nav a {
+      position: relative;
+      padding: 4px 0;
+    }
+
+    .main-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      background: var(--green);
+      transition: width 0.2s ease-out;
+    }
+
+    .main-nav a:hover::after {
+      width: 100%;
+    }
+
+    .btn-nav {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--green);
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .btn-nav:hover {
+      background: var(--green-soft);
+    }
+
+    .nav-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* HERO */
+
+    .hero-wrapper {
+      position: relative;
+      height: 160vh;
+      width: 100%;
+    }
+
+    .hero {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      min-height: 520px;
+      color: var(--white);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.25s ease-out, border-radius 0.25s ease-out;
+      border-radius: 0;
+    }
+
+    .hero-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(5, 20, 10, .55),
+        rgba(5, 20, 10, .75)
+      );
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 72px 20px;
+      text-align: left;
+    }
+
+    .hero-kicker {
+      font-family: "Nunito", sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: .9;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(32px, 4vw, 42px);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      opacity: .9;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .hero-text {
+      max-width: 640px;
+      font-size: 15px;
+      opacity: .96;
+      margin-bottom: 14px;
+    }
+
+    .hero-note {
+      font-size: 14px;
+      opacity: .9;
+      margin-bottom: 26px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero.hide-text .hero-inner {
+      opacity: 0;
+      transition: opacity 0.25s ease-out;
+    }
+
+    .hero.shrink .hero-img {
+      border-radius: 28px;
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.26);
+    }
+
+    #elegant-slogan {
+      opacity: 0;
+      transform: translateY(16px) scale(0.98);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      text-align: center;
+      font-family: "Great Vibes", "Playfair Display", serif;
+      font-size: 34px;
+      font-style: normal;
+      letter-spacing: 0.02em;
+      color: var(--green-dark);
+      padding: 10px 20px 0;
+      max-width: 880px;
+      margin: -150px auto 0;
+      line-height: 1.4;
+    }
+
+    #elegant-slogan.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        height: auto;
+        min-height: 0;
+      }
+
+      .hero-inner {
+        padding: 88px 18px 72px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: var(--white);
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out,
+        filter 0.15s ease-out;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.04);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.22);
+    }
+
+    .btn-ghost {
+      background: rgba(247, 245, 240, 0.95);
+      color: var(--green-dark);
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 700;
+    }
+
+    .btn-ghost:hover {
+      background: #ffffff;
+    }
+
+    /* SEZIONI GENERALI */
+
+    .section {
+      padding: 56px 20px 72px;
+    }
+
+    .section-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .section-kicker {
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 26px;
+      color: var(--green-dark);
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .section-intro {
+      max-width: 620px;
+      font-size: 15px;
+      color: var(--text-soft);
+      margin-bottom: 26px;
+    }
+
+    /* BLOCCO PROFILO · FAMIGLIA, CASA, PATRIMONIO */
+
+    #chi-sono {
+      padding: 72px 20px 80px;
+    }
+
+    #chi-sono .section-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .section-profile-title {
+      margin-bottom: 26px;
+    }
+
+    .profile-layout {
+      background: #ffffff;
+      border-radius: 26px;
+      padding: 30px 30px 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.05fr);
+      gap: 34px;
+      box-shadow: 0 22px 60px rgba(12, 37, 20, 0.14);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .profile-main-intro {
+      font-size: 15px;
+      color: var(--text-soft);
+      margin-bottom: 18px;
+    }
+
+    .theme-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .theme-chip {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-weight: 700;
+    }
+
+    .profile-comment {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 18px;
+    }
+
+    .profile-areas {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 24px;
+    }
+
+    .profile-area h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+
+    .profile-area p {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .profile-photo-card {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #d3c3aa;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .profile-photo-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-photo-overlay {
+      position: absolute;
+      inset: auto 18px 18px 18px;
+      background: rgba(20, 55, 38, 0.94);
+      color: #ffffff;
+      border-radius: 18px;
+      padding: 10px 14px 11px;
+      font-size: 12px;
+    }
+
+    .profile-photo-name {
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .profile-photo-role {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: .85;
+      font-weight: 700;
+    }
+
+    .profile-photo-note {
+      margin-top: 4px;
+      font-size: 11px;
+      opacity: .9;
+    }
+
+    @media (max-width: 960px) {
+      .profile-layout {
+        grid-template-columns: 1fr;
+        padding: 24px 22px 26px;
+      }
+
+      .profile-photo-card {
+        max-height: 360px;
+      }
+
+      .profile-photo-overlay {
+        inset: auto 14px 14px 14px;
+      }
+
+      .profile-areas {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      #chi-sono {
+        padding-top: 64px;
+        padding-bottom: 70px;
+      }
+
+      .profile-layout {
+        border-radius: 22px;
+      }
+    }
+
+    /* AREE DI ATTIVITÀ */
+
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .area-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(0,0,0,0.04);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+    }
+
+    .area-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--green-dark);
+      font-size: 15px;
+    }
+
+    .area-tag {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      opacity: .85;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .area-text {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .area-note {
+      font-size: 12px;
+      color: var(--green);
+      opacity: .9;
+      font-weight: 600;
+    }
+
+    /* CONTATTI */
+
+    #contatti {
+      padding: 48px 20px 64px;
+      background: var(--green-soft);
+    }
+
+    #contatti .section-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    #contatti h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 22px;
+      color: var(--green-dark);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    #contatti p {
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+
+    #contatti p strong {
+      font-weight: 700;
+    }
+
+    #contatti a {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    #contatti a:hover {
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+
+    .site-footer {
+      padding: 18px 20px 24px;
+      font-size: 12px;
+      color: #6a726a;
+      background: #f0ebe1;
+      border-top: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-weight: 500;
+    }
+
+    /* RESPONSIVE GENERALE */
+
+    @media (max-width: 960px) {
+      .areas-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 800px) {
+      .header-inner {
+        padding-inline: 16px;
+      }
+
+      .main-nav {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: block;
+        color: var(--green-dark);
+      }
+
+      .areas-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .brand {
+        font-size: 17px;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .main-nav.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 16px;
+        top: 56px;
+        padding: 12px 16px;
+        background: rgba(247, 245, 240, 0.98);
+        border-radius: 16px;
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+      }
+    }
+
+    /* TIPOGRAFIA SU SCHERMI GRANDI (PC GRANDI) */
+
+    @media (min-width: 1200px) {
+      body {
+        font-size: 17px;
+      }
+
+      .brand {
+        font-size: 21px;
+      }
+
+      .main-nav {
+        font-size: 15px;
+      }
+
+      .hero-title {
+        font-size: clamp(40px, 3.2vw, 52px);
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+      }
+
+      .hero-text,
+      .hero-note,
+      .section-intro,
+      .profile-main-intro {
+        font-size: 16px;
+      }
+
+      .section-title {
+        font-size: 30px;
+      }
+
+      .profile-area p,
+      .area-text {
+        font-size: 14px;
+      }
+
+      #contatti h2 {
+        font-size: 24px;
+      }
+
+      #contatti p {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">Avvocato Isabella Mugnaini</div>
+
+      <button class="nav-toggle" aria-label="Apri menu" onclick="toggleNav()">☰</button>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#chi-sono">Chi sono</a>
+        <a href="#aree-attivita">Aree di attività</a>
+        <a href="#contatti">Contatti</a>
+        <a href="#contatti" class="btn-nav">Scrivi su WhatsApp</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero-wrapper">
+    <section class="hero" aria-label="Studio legale civile e di famiglia">
+        <div class="hero-img" style="background-image:
+          url('Immsfondo1.jpg');"
+          role="img" aria-label="Paesaggio toscano con colline e cipressi"></div>
+
+    <div class="hero-inner">
+      <div class="hero-kicker">Diritto civile e di famiglia · Barberino Tavarnelle</div>
+      <h1 class="hero-title">Avvocato Isabella Mugnaini</h1>
+      <div class="hero-subtitle">Assistenza legale per famiglie, persone e patrimoni</div>
+
+      <p class="hero-text">
+        Supporto a privati, famiglie e professionisti nelle controversie che riguardano la
+        vita quotidiana: rapporti familiari, casa, condominio, locazioni, successioni,
+        responsabilità e crediti.
+      </p>
+      <p class="hero-note">
+        Ricevo su appuntamento e offro consulenza anche da remoto e in mediazione civile telematica.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contatti" class="btn-primary">Richiedi un contatto</a>
+        <a href="https://wa.me/39XXXXXXXXXX" class="btn-ghost" target="_blank" rel="noopener">
+          Scrivi su WhatsApp
+        </a>
+      </div>
+    </div>
+
+      </section>
+  </div>
+
+  <div id="elegant-slogan">
+    <!-- Il testo viene digitato via JS -->
+    <span aria-hidden="true"></span>
+  </div>
+
+  <!-- SEZIONE CHI SONO / PROFILO -->
+  <section class="section" id="chi-sono">
+    <div class="section-inner">
+      <div class="section-profile-title">
+        <div class="section-kicker">Chi sono</div>
+        <h2 class="section-title">Al centro: famiglie, persone e relazioni quotidiane</h2>
+      </div>
+
+      <div class="profile-layout">
+        <!-- COLONNA TESTO -->
+        <div class="profile-main">
+          <p class="profile-main-intro">
+            Seguo in particolare le controversie che toccano da vicino la vita delle persone:
+            rapporti familiari, casa, vicinato, beni di famiglia, responsabilità e rapporti
+            con banche e assicurazioni. Sono le materie che, anche secondo le statistiche
+            ufficiali, assorbono la gran parte del contenzioso civile.
+          </p>
+
+          <div class="theme-chips">
+            <span class="theme-chip">Famiglia e persone</span>
+            <span class="theme-chip">Condominio e vicinato</span>
+            <span class="theme-chip">Locazioni e proprietà</span>
+            <span class="theme-chip">Patrimonio e successioni</span>
+            <span class="theme-chip">Responsabilità civile</span>
+            <span class="theme-chip">Bancario e crediti</span>
+          </div>
+
+          <p class="profile-comment">
+            Molte di queste controversie oggi passano prima dalla mediazione civile o dalla
+            negoziazione assistita: accompagno i clienti in questo percorso, spesso anche in
+            modalità telematica, valutando quando conviene trovare un accordo e quando è
+            necessario arrivare al giudice.
+          </p>
+
+          <div class="profile-areas">
+            <div class="profile-area">
+              <h3>Famiglia e persone</h3>
+              <p>
+                Separazioni e divorzi, affidamento e mantenimento dei figli, revisione degli
+                assegni, amministrazioni di sostegno, responsabilità genitoriale.
+              </p>
+            </div>
+
+            <div class="profile-area">
+              <h3>Condominio e rapporti di vicinato</h3>
+              <p>
+                Liti su spese condominiali e parti comuni, rumori e immissioni, infiltrazioni,
+                uso del lastrico solare, regolamenti condominiali.
+              </p>
+            </div>
+
+            <div class="profile-area">
+              <h3>Locazioni abitative e commerciali</h3>
+              <p>
+                Morosità, finita locazione, sfratti, rilascio dell’immobile, canoni concordati,
+                indennità di avviamento, affitti brevi e locazioni turistiche.
+              </p>
+            </div>
+
+            <div class="profile-area">
+              <h3>Proprietà, successioni e diritti reali</h3>
+              <p>
+                Usucapione, servitù di passaggio, confini tra fondi, azioni possessorie, divisioni
+                ereditarie, impugnazioni di testamenti e tutela dei legittimari.
+              </p>
+            </div>
+
+            <div class="profile-area">
+              <h3>Responsabilità civile e assicurazioni</h3>
+              <p>
+                Sinistri stradali, responsabilità medica e sanitaria, responsabilità professionale,
+                danni da cose in custodia o da prodotto difettoso, rapporti con le compagnie.
+              </p>
+            </div>
+
+            <div class="profile-area">
+              <h3>Bancario, finanziario e crediti</h3>
+              <p>
+                Contenzioso su mutui, conti correnti e finanziamenti, contratti d’impresa, appalti
+                privati, recupero crediti e gestione stragiudiziale delle posizioni debitorie.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLONNA FOTO -->
+        <aside class="profile-photo-card" aria-label="Avvocato Isabella Mugnaini">
+          <!-- metti il file giusto, es. iim1.jpg -->
+          <img src="iim1.jpg" alt="Avvocato Isabella Mugnaini in un borgo toscano">
+
+          <div class="profile-photo-overlay">
+            <div class="profile-photo-name">Avv. Isabella Mugnaini</div>
+            <div class="profile-photo-role">Avvocato civilista · Toscana</div>
+            <div class="profile-photo-note">
+              Studio a Barberino Tavarnelle, consulenza anche online e in mediazione civile.
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREE DI ATTIVITÀ -->
+  <section class="section" id="aree-attivita">
+    <div class="section-inner">
+      <div class="section-kicker">Aree di attività</div>
+      <h2 class="section-title">Come posso assisterti</h2>
+      <p class="section-intro">
+        Valutiamo insieme la tua situazione concreta e individuiamo il percorso più adatto, con attenzione
+        ai tempi, ai costi e alla tutela dei tuoi interessi.
+      </p>
+
+      <div class="areas-grid">
+        <article class="area-card">
+          <div class="area-tag">Famiglia e persone</div>
+          <h3 class="area-title">Diritto di famiglia</h3>
+          <p class="area-text">
+            Procedimenti di separazione e divorzio, regolamentazione dei rapporti con i figli,
+            amministrazioni di sostegno e tutela del patrimonio familiare.
+          </p>
+          <div class="area-note">Centralità della persona e dei minori.</div>
+        </article>
+
+        <article class="area-card">
+          <div class="area-tag">Casa e immobili</div>
+          <h3 class="area-title">Condominio e locazioni</h3>
+          <p class="area-text">
+            Controversie condominiali, affitti abitativi e commerciali, affitti brevi e locazioni
+            turistiche, sfratti per morosità e finita locazione.
+          </p>
+          <div class="area-note">Un punto fermo nei rapporti di vicinato.</div>
+        </article>
+
+        <article class="area-card">
+          <div class="area-tag">Patrimonio</div>
+          <h3 class="area-title">Successioni e diritti reali</h3>
+          <p class="area-text">
+            Usucapione, servitù, confini tra fondi, azioni possessorie, divisioni ereditarie e
+            impugnazioni di testamenti.
+          </p>
+          <div class="area-note">Tutela di beni e passaggi generazionali.</div>
+        </article>
+
+        <article class="area-card">
+          <div class="area-tag">Responsabilità</div>
+          <h3 class="area-title">Responsabilità civile e crediti</h3>
+          <p class="area-text">
+            Sinistri stradali, responsabilità medica e professionale, rapporti con assicurazioni,
+            contratti bancari e finanziari, recupero crediti.
+          </p>
+          <div class="area-note">Valutazione di rischi, danni e convenienza delle azioni.</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section id="contatti">
+    <div class="section-inner">
+      <h2>Contatti</h2>
+      <p><strong>Studio legale Avv. Isabella Mugnaini</strong></p>
+      <p>Piazza Mazzini 2 – 50028 Barberino Tavarnelle (FI)</p>
+      <p>Email: <a href="mailto:info@studio-mugnaini.it">info@studio-mugnaini.it</a></p>
+      <p>Telefono: <a href="tel:+390558079127">+39 055 8079127</a></p>
+      <p>WhatsApp: <a href="https://wa.me/39XXXXXXXXXX" target="_blank" rel="noopener">scrivi al numero dedicato</a></p>
+      <p style="margin-top:10px;font-size:13px;">
+        Ricevo su appuntamento. È possibile concordare anche colloqui online.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Studio legale Avv. Isabella Mugnaini · Tutti i diritti riservati.</div>
+      <div><a href="#">Informativa privacy</a></div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('open');
+    }
+
+    const heroSection = document.querySelector('.hero');
+    const heroWrapper = document.querySelector('.hero-wrapper');
+    const heroImg = document.querySelector('.hero-img');
+    const slogan = document.getElementById('elegant-slogan');
+    const sloganSpan = slogan ? slogan.querySelector('span') : null;
+    const mqNarrow = window.matchMedia('(max-width: 800px)');
+    const sloganText = '“Chiarezza, competenza e tutela quando ne hai piu bisogno.”';
+
+    let typingTimer = null;
+    let typedLength = 0;
+    const typeDelay = 45;
+
+    let scrollConfig = {
+      hideTextAt: 0.15,
+      scaleFactor: 0.5,
+      translateMax: 120,
+      shrinkAt: 0.7,
+      sloganAt: 0.88,
+    };
+
+    function updateScrollConfig() {
+      const narrow = mqNarrow.matches;
+      scrollConfig = {
+        hideTextAt: narrow ? 0.12 : 0.15,
+        scaleFactor: narrow ? 0.35 : 0.5,
+        translateMax: narrow ? 80 : 120,
+        shrinkAt: narrow ? 0.6 : 0.7,
+        sloganAt: narrow ? 0.82 : 0.88,
+      };
+    }
+    updateScrollConfig();
+    mqNarrow.addEventListener('change', updateScrollConfig);
+
+    function resetTyping() {
+      if (typingTimer) {
+        clearInterval(typingTimer);
+        typingTimer = null;
+      }
+      typedLength = 0;
+      if (sloganSpan) sloganSpan.textContent = '';
+    }
+
+    function startTyping() {
+      if (!sloganSpan || typingTimer) return;
+      typingTimer = setInterval(() => {
+        if (typedLength < sloganText.length) {
+          sloganSpan.textContent += sloganText.charAt(typedLength);
+          typedLength += 1;
+        } else {
+          clearInterval(typingTimer);
+          typingTimer = null;
+        }
+      }, typeDelay);
+    }
+
+    function handleHeroScroll() {
+      if (!heroSection || !heroWrapper) return;
+
+      const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
+      const wrapperTop = heroWrapper.offsetTop;
+      const scrolled = window.scrollY - wrapperTop;
+      const progress = Math.min(1, Math.max(0, wrapperHeight > 0 ? scrolled / wrapperHeight : 0));
+
+      if (progress > scrollConfig.hideTextAt) {
+        heroSection.classList.add('hide-text');
+      } else {
+        heroSection.classList.remove('hide-text');
+      }
+
+      const scale = 1 - (progress * scrollConfig.scaleFactor);
+      const translateY = progress * scrollConfig.translateMax;
+
+      if (heroImg) {
+        heroImg.style.transform = `translateY(${translateY}px) scale(${scale})`;
+      }
+
+      if (progress > scrollConfig.shrinkAt) {
+        heroSection.classList.add('shrink');
+      } else {
+        heroSection.classList.remove('shrink');
+      }
+
+      if (slogan) {
+        if (progress > scrollConfig.sloganAt) {
+          slogan.classList.add('show');
+          startTyping();
+        } else {
+          slogan.classList.remove('show');
+          resetTyping();
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleHeroScroll);
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    handleHeroScroll();
+  </script>
+
+</body>
+</html>
