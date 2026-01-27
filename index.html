@@ -1,111 +1,70 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Avvocato Isabella Mugnaini – Diritto civile e di famiglia</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio legale Avv. Isabella Mugnaini</title>
 
-  <!-- FONT -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Playfair+Display:wght@500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --green-dark: #143726;
-      --green: #1f5a3a;
-      --green-soft: #e3f0e4;
-      --sand: #f2e6d3;
-      --bg: #f7f5f0;
-      --text-main: #1f2421;
-      --text-soft: #3f463f;
+      --bg: #ffffffc1;
+      
+      --green: #4a7b5b;
+      --green-dark: #123322;
+      --green-soft: rgba(74,123,91,0.09);
+      --text: #242220;
+      --muted: #7b746e;
       --white: #ffffff;
+      --ink: #000000;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 72px;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      color: var(--text-main);
+      font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
+    }
+    /* Grain opzionale sopra lo sfondo (se lo vuoi) */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .10;
+      mix-blend-mode: overlay;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
     /* HEADER */
-
     .site-header {
       position: sticky;
       top: 0;
       z-index: 20;
-      background: rgba(247, 245, 240, 0.96);
+      background: rgba(247,244,239,0.92);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
     }
-
     .header-inner {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 12px 20px;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 16px;
     }
-
-    .brand {
-      font-family: "Playfair Display", serif;
-      font-size: 19px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      color: var(--green-dark);
-      text-transform: none;
-      white-space: nowrap;
-    }
-
-    .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      font-size: 14px;
-      color: var(--text-soft);
-      font-weight: 600;
-    }
-
-    .main-nav a {
-      position: relative;
-      padding: 4px 0;
-    }
-
-    .main-nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -2px;
-      width: 0;
-      height: 2px;
-      background: var(--green);
-      transition: width 0.2s ease-out;
-    }
-
-    .main-nav a:hover::after {
-      width: 100%;
-    }
-
+    .brand { font-family: "Playfair Display", serif; font-size: 18px; font-weight: 600; }
+    .main-nav { display: flex; align-items: center; gap: 16px; font-size: 14px; }
+    .main-nav a { padding: 6px 0; }
     .btn-nav {
       padding: 8px 14px;
       border-radius: 999px;
@@ -114,27 +73,11 @@
       font-size: 13px;
       font-weight: 700;
     }
+    .btn-nav:hover { background: var(--green-soft); }
+    .nav-toggle { display: none; border: none; background: transparent; font-size: 24px; cursor: pointer; }
 
-    .btn-nav:hover {
-      background: var(--green-soft);
-    }
-
-    .nav-toggle {
-      display: none;
-      border: none;
-      background: transparent;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    /* HERO */
-
-    .hero-wrapper {
-      position: relative;
-      height: 160vh;
-      width: 100%;
-    }
-
+    /* HERO + SCROLL EFFECT */
+    .hero-wrapper { position: relative; height: 160vh; width: 100%; }
     .hero {
       position: sticky;
       top: 0;
@@ -146,136 +89,210 @@
       align-items: center;
       justify-content: center;
     }
-
     .hero-img {
       position: absolute;
       inset: 0;
       background-size: cover;
       background-position: center;
-      transition: transform 0.25s ease-out, border-radius 0.25s ease-out;
+      filter: none;
+      transition: border-radius 0.25s ease-out, box-shadow 0.25s ease-out, filter 0.35s ease-out;
+      will-change: transform;
+      transform: translate3d(0,0,0);
       border-radius: 0;
+      z-index: 2;
     }
-
-    .hero-img::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(5, 20, 10, .55),
-        rgba(5, 20, 10, .75)
-      );
-    }
-
     .hero-inner {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       max-width: 1120px;
       margin: 0 auto;
       padding: 72px 20px;
       text-align: left;
     }
+    .hero-kicker { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; opacity: .9; margin-bottom: 10px; font-weight: 700; }
+    .hero-title { font-family: "Playfair Display", serif; font-size: clamp(32px, 4vw, 42px); font-weight: 700; margin-bottom: 8px; }
+    .hero-subtitle { font-size: 15px; letter-spacing: .12em; text-transform: uppercase; opacity: .9; margin-bottom: 18px; font-weight: 700; }
+    .hero-text { max-width: 640px; font-size: 15px; opacity: .96; margin-bottom: 14px; }
+    .hero-note { font-size: 14px; opacity: .9; margin-bottom: 26px; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
 
-    .hero-kicker {
-      font-family: "Nunito", sans-serif;
-      font-size: 13px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: .9;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
+    .hero.hide-text .hero-inner { opacity: 0; transition: opacity 0.25s ease-out; }
+    .hero.shrink .hero-img { border-radius: 28px; box-shadow: 0 26px 60px rgba(0, 0, 0, 0.26); }
 
-    .hero-title {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(32px, 4vw, 42px);
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .hero-subtitle {
-      font-size: 15px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      opacity: .9;
-      margin-bottom: 18px;
-      font-weight: 700;
-    }
-
-    .hero-text {
-      max-width: 640px;
-      font-size: 15px;
-      opacity: .96;
-      margin-bottom: 14px;
-    }
-
-    .hero-note {
-      font-size: 14px;
-      opacity: .9;
-      margin-bottom: 26px;
-    }
-
-    .hero-actions {
+    /* MARQUEE (stesso stile: scorre orizzontale, ma POSIZIONATO SOPRA la foto quando si rimpicciolisce) */
+    .hero-marquee{
+      position: absolute;
+      top: clamp(48px, 7vh, 96px);
+      left: 0; right: 0;
+      height: clamp(70px, 12vh, 140px);
+      z-index: 3;            /* sopra: deve stare appena sopra la foto */
+      pointer-events: none;
+      opacity: var(--marqueeOpacity, 0);
+      transition: opacity 0.35s ease-out;
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-inline: 10px;
+    }
+    .marquee-track{
+      width: 120vw;
+      white-space: nowrap;
+      will-change: transform;
+      display: inline-flex;
+      align-items: center;
+      gap: 56px;
+      animation: marqueeMove 14s linear infinite;
+    }
+    .marquee-content{
+      display: inline-flex;
+      gap: 56px;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      font-size: clamp(22px, 3.2vw, 52px);
+      letter-spacing: 0.10em;
+      color: rgba(0,0,0,0.95);
+      text-transform: uppercase;
+    }
+    @keyframes marqueeMove{
+      from { transform: translate3d(0,0,0); }
+      to   { transform: translate3d(-50%,0,0); }
     }
 
-    .hero.hide-text .hero-inner {
+    /* SLOGAN ELEGANTE */
+    #slogan{
+      padding: 18px 20px 6px;
+      text-align: center;
+    }
+    #elegant-slogan{
+      max-width: 880px;
+      margin: 0 auto 18px;
+      padding: 6px 18px 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(22px, 2.6vw, 36px);
+      line-height: 1.3;
+      letter-spacing: 0.02em;
+      color: var(--green-dark);
       opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+    }
+    #elegant-slogan span{ font-style: italic; }
+    #elegant-slogan.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* HERO – FIRMA */
+    .hero-signature-layer {
+      position: absolute;
+
+      left: 50%;
+      bottom: clamp(40px, 9vh, 90px);
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      pointer-events: none;
+      z-index: 4;
+
+      opacity: 0;
+      transform: translate(-50%, 14px);
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+
+
+    .hero-signature-label {
+      font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(255,255,255,0.85); margin-bottom: 10px; font-weight: 700;
+    }
+    .hero-signature-wrapper{
+      width: min(420px, 70vw);
+      height: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: visible;
+
+      filter: drop-shadow(0 10px 22px rgba(0,0,0,0.45));
+      will-change: transform;
+    }
+
+
+    .hero-signature-embed{
+      width: 100%;
+      height: 100%;
+      display: block;
+
+      object-fit: contain;          /* importantissimo: mostra TUTTA la firma */
+      opacity: 0;
+      transform: scale(0.8);
+      will-change: transform, opacity;
       transition: opacity 0.25s ease-out;
     }
 
-    .hero.shrink .hero-img {
-      border-radius: 28px;
-      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.26);
-    }
 
-    #elegant-slogan {
-      opacity: 0;
-      transform: translateY(16px) scale(0.98);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      text-align: center;
-      font-family: "Great Vibes", "Playfair Display", serif;
-      font-size: 34px;
-      font-style: normal;
-      letter-spacing: 0.02em;
-      color: var(--green-dark);
-      padding: 10px 20px 0;
-      max-width: 880px;
-      margin: -150px auto 0;
-      line-height: 1.4;
-    }
-
-    #elegant-slogan.show {
+    .hero.show-signature .hero-signature-layer {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translate(-50%, 0);
     }
 
-    @media (max-width: 800px) {
-      .hero {
-        height: auto;
-        min-height: 0;
-      }
 
-      .hero-inner {
-        padding: 88px 18px 72px;
-      }
+    /* Quando compare la firma: la foto va leggermente in secondo piano */
+    .hero.show-signature .hero-img { filter: brightness(0.72) contrast(1.05) saturate(1.02); }
+    /* SEZIONI */
+    .section { padding: 80px 20px; }
 
-      .hero-actions {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    /* Riduce lo spazio tra Servizi e inizio Percorso */
+    #assistenza.section{ padding-bottom: 6px; }
 
-      /* Evita che lo slogan si sovrapponga all'immagine su mobile */
-      #elegant-slogan {
-        margin: 18px auto 22px;
-        padding: 6px 18px 0;
-        font-size: 26px;
-        line-height: 1.3;
-      }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    .section-kicker { font-size: 13px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
+    .section-title { font-family: "Playfair Display", serif; font-size: 32px; margin-bottom: 10px; }
+    .section-intro { max-width: 680px; font-size: 15px; color: var(--muted); margin-bottom: 26px; }
+
+    
+    /* CHI SONO – testo senza pannello (scritto sullo sfondo) */
+    #chi-sono .chi-sono-text{
+      max-width: 980px;
     }
+    #chi-sono .chi-sono-lead{
+      margin-top: 18px;
+      font-weight: 800;
+      letter-spacing: .01em;
+      color: var(--green-dark);
+      font-size: clamp(16px, 1.35vw, 20px);
+      line-height: 1.5;
+    }
+    #chi-sono .chi-sono-body{
+      margin-top: 14px;
+      color: rgba(0,0,0,0.68);
+      font-size: clamp(14px, 1.05vw, 16px);
+      line-height: 1.75;
+      max-width: 820px;
+    }
+/* CHI SONO */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+    }
+    .profile-grid.single{ grid-template-columns: 1fr; }
 
+    .profile-main-intro { font-size: 15px; margin-bottom: 14px; color: rgba(255,255,255,0.92); }
+    .profile-card {
+      background: rgba(255,255,255,0.94);
+      border-radius: 22px;
+      padding: 20px 18px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.14);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .profile-card p { font-size: 14px; color: var(--muted); }
+
+    /* BOTTONI */
     .btn-primary {
       background: var(--green);
       color: var(--white);
@@ -290,531 +307,413 @@
       justify-content: center;
       gap: 8px;
       box-shadow: 0 8px 18px rgba(0,0,0,0.18);
-      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out,
-        filter 0.15s ease-out;
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, filter 0.15s ease-out;
     }
-
-    .btn-primary:hover {
-      filter: brightness(1.04);
-      transform: translateY(-1px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.22);
-    }
-
+    .btn-primary:hover { filter: brightness(1.04); transform: translateY(-1px); box-shadow: 0 12px 26px rgba(0,0,0,0.22); }
     .btn-ghost {
-      background: rgba(247, 245, 240, 0.95);
-      color: var(--green-dark);
-      padding: 12px 22px;
+      padding: 11px 22px;
       border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.8);
+      color: #ffffff;
       font-size: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      cursor: pointer;
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      font-weight: 700;
+      gap: 6px;
+      backdrop-filter: blur(6px);
     }
+    .btn-ghost:hover { background: rgba(0,0,0,0.1); }
 
-    .btn-ghost:hover {
-      background: #ffffff;
-    }
-
-    /* SEZIONI GENERALI */
-
-    .section {
-      padding: 56px 20px 72px;
-    }
-
-    .section-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    .section-kicker {
-      font-size: 12px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--green-dark);
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-
-    .section-title {
-      font-family: "Playfair Display", serif;
-      font-size: 26px;
-      color: var(--green-dark);
-      margin-bottom: 16px;
-      font-weight: 700;
-    }
-
-    .section-intro {
-      max-width: 620px;
-      font-size: 15px;
-      color: var(--text-soft);
-      margin-bottom: 26px;
-    }
-
-    /* BLOCCO PROFILO · FAMIGLIA, CASA, PATRIMONIO */
-
-    #chi-sono {
-      padding: 72px 20px 80px;
-      background: #f7f5f0;
-    }
-
-    #chi-sono .section-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 28px 26px 32px;
-      background: #ffffff;
-      border-radius: 28px;
-      box-shadow: 0 18px 52px rgba(0, 0, 0, 0.06);
-    }
-
-    .section-profile-title {
-      margin-bottom: 26px;
-    }
-
-    .profile-layout {
-      padding: 8px 4px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: start;
-    }
-
-    .profile-main {
-      position: relative;
-      padding: 16px 18px 12px;
-      background: linear-gradient(180deg, #fbfaf7 0%, #ffffff 100%);
-      border-radius: 22px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.04);
-    }
-
-    .profile-scroll-hint {
-      display: none;
-    }
-
-    .profile-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 18px;
-      margin-bottom: 12px;
-    }
-
-    .profile-meta {
-      display: grid;
-      grid-template-columns: repeat(2, auto);
-      gap: 6px 14px;
-      font-size: 12px;
-      color: var(--text-soft);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 700;
-    }
-
-    .profile-main-intro {
-      font-size: 15px;
-      color: var(--text-main);
-      margin-bottom: 16px;
-      line-height: 1.75;
-    }
-
-    .profile-comment {
-      background: #ffffff;
-      padding: 14px 16px;
-      border-radius: 14px;
-      font-size: 14px;
-      line-height: 1.65;
-      color: var(--text-main);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.07);
-      margin-bottom: 18px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-
-    .profile-points {
-      list-style: none;
-      display: grid;
-      gap: 8px;
-      margin: 0 0 18px;
-      padding: 0;
-    }
-
-    .profile-points li {
-      font-size: 13px;
-      color: var(--text-soft);
-      line-height: 1.65;
-      padding: 10px 12px;
-      border: none;
-      border-radius: 12px;
-      background: #f9f6ee;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 8px;
-      align-items: start;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
-    }
-
-    .profile-points li::before {
-      content: "—";
-      color: var(--text-soft);
-      font-weight: 700;
-      margin-top: 1px;
-    }
-
-    .profile-areas {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px 18px;
-      margin-top: 2px;
-    }
-
-    .profile-area {
-      border-radius: 18px;
-      padding: 18px 18px 20px;
-      background: #ffffff;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
-      border: 1px solid rgba(20, 55, 38, 0.08);
-      border-left: 5px solid var(--green);
-    }
-
-    .profile-area h3 {
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--green-dark);
-      margin-bottom: 8px;
-      letter-spacing: 0.01em;
-    }
-
-    .profile-area p {
-      font-size: 14px;
-      color: var(--text-soft);
-      line-height: 1.7;
-    }
-
-    .profile-photo-card {
-      position: relative;
-      border-radius: 24px;
-      overflow: hidden; 
-      background: none;
-      min-height: 300px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: none;
-      box-shadow: none;        /* 🔥 RIMOSSO PER ELIMINARE IL DOPPIO BORDO */
-      transform: translateY(60px);
-      opacity: 0;
-      transition: transform 0.55s ease, opacity 0.55s ease;
-    }
-
-
-    .profile-photo-card.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .profile-photo-card img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 22px;
-      box-shadow: none;
-    }
-
-    .profile-photo-overlay {
-      position: static;
-      margin: 0 6px 4px 6px;
-      background: #ffffff;
-      color: var(--text-main);
-      border-radius: 14px;
-      padding: 12px 14px 12px;
-      font-size: 12px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.1);
-      backdrop-filter: none;
-    }
-
-    .profile-photo-name {
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .profile-photo-role {
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      opacity: .75;
-      font-weight: 700;
-    }
-
-    .profile-photo-note {
-      margin-top: 4px;
-      font-size: 11px;
-      opacity: .85;
-    }
-
-    @media (min-width: 961px) {
-      .profile-photo-card {
-        height: 100%;
-      }
-
-      .profile-photo-card img {
-        height: 100%;
-      }
-    }
-
-    @media (max-width: 960px) {
-      .profile-layout {
-        grid-template-columns: 1fr;
-        padding: 24px 22px 26px;
-      }
-
-      .profile-header {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .profile-main {
-        max-height: none;
-      }
-
-      .profile-meta {
-        grid-template-columns: 1fr;
-      }
-
-      .profile-photo-card {
-        max-height: none;
-        height: auto;
-      }
-
-      .profile-areas {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 600px) {
-      #chi-sono {
-        padding-top: 64px;
-        padding-bottom: 70px;
-      }
-
-      .profile-layout {
-        border-radius: 22px;
-      }
-    }
-
-    /* AREE DI ATTIVITÀ */
-
-    .areas-grid {
+    /* --- SERVIZI (pannelli bianchi accostati) --- */
+    .services-grid{
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 18px;
+      align-items: stretch;
     }
-
-    .area-card {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 18px 18px 20px;
+    .service-card{
+      background: #f6fbf6;
+      border-radius: 22px;
+      padding: 22px 20px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.10);
       border: 1px solid rgba(0,0,0,0.04);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-
-    .area-title {
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: var(--green-dark);
-      font-size: 15px;
-    }
-
-    .area-tag {
+    .service-kicker{
       font-size: 11px;
-      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--text-soft);
-      opacity: .85;
-      margin-bottom: 8px;
+      letter-spacing: 0.18em;
+      color: var(--muted);
       font-weight: 700;
     }
-
-    .area-text {
-      font-size: 13px;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-
-    .area-note {
-      font-size: 12px;
-      color: var(--green);
-      opacity: .9;
-      font-weight: 600;
-    }
-
-    /* CONTATTI */
-
-    #contatti {
-      padding: 48px 20px 64px;
-      background: var(--green-soft);
-    }
-
-    #contatti .section-inner {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    #contatti h2 {
+    .service-card h3{
+      margin: 0;
       font-family: "Playfair Display", serif;
-      font-size: 22px;
+      font-size: 24px;
       color: var(--green-dark);
-      margin-bottom: 12px;
-      font-weight: 700;
+      line-height: 1.15;
     }
-
-    #contatti p {
+    .service-card p{
+      margin: 0;
+      color: var(--muted);
       font-size: 14px;
-      color: var(--text-soft);
-      margin-bottom: 4px;
+      line-height: 1.65;
+      flex: 1;
+    }
+    .service-note{
+      font-size: 13px;
+      color: var(--green-dark);
+      font-weight: 800;
     }
 
-    #contatti p strong {
-      font-weight: 700;
+    /* --- HORIZONTAL SCROLL (timeline full-screen) --- */
+    .hscroll { position: relative; background: transparent; }
+    .hscroll__sticky { position: sticky; top: 0; height: 100vh; overflow: visible; display: flex; align-items: stretch; }
+    .hscroll__track { display: flex; height: 100%; width: max-content; will-change: transform; transform: translate3d(0,0,0); }
+
+    .hpanel{
+      position: relative;
+      flex: 0 0 100vw;
+      height: 100%;
+      padding: clamp(18px, 3vw, 44px);
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .hpanel__content{
+      max-width: min(520px, 86vw);
+      padding: 18px 18px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.18);
+      border: 1px solid rgba(0,0,0,0.06);
+      z-index: 2;
+    }
+    
+/* TIMELINE: solo foto (niente pannelli bianchi) */
+    #timeline .hpanel__content{ display:none !important; }
+
+.hpanel__year{
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .hpanel__content h3{
+      margin: 0 0 10px;
+      font-size: clamp(22px, 2.2vw, 34px);
+      color: var(--green-dark);
+    }
+    .hpanel__content p{ margin: 0; color: var(--muted); font-size: clamp(14px, 1.15vw, 18px); }
+
+    .hphoto{
+      position: absolute;
+
+      /* clamp: mai fuori dalla viewport */
+      left: clamp(10%, var(--x, 50%), 90%);
+      top:  clamp(12%, var(--y, 50%), 88%);
+
+      /* dimensioni diverse ma sempre dentro l'altezza della pagina */
+      width: min(var(--w, clamp(160px, 22vw, 380px)), calc(100vh - 190px));
+      aspect-ratio: 1 / 1;
+
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 28px 70px rgba(0,0,0,0.25);
+      transform: translate(-50%, -50%); /* niente diagonale */
+      z-index: 1;
+      background: rgba(0,0,0,0.06);
+    }
+    .hphoto img{ width: 100%; height: 100%; object-fit: cover; }
+#timeline.timeline-started .hpanel:first-child .hphoto{
+        opacity: 1;
+        transform: translate(-50%, -50%);
+        transition: opacity .35s ease, transform .35s ease;
+      }
+
+    /* CONTATTI = pagina finale (bianca piena) */
+    #contatti {
+      background: #ffffff;
+      border-top: 1px solid rgba(0,0,0,0.04);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;               /* non più centrato */
+      padding-top: clamp(90px, 14vh, 170px); /* contenuto più giù */
+      padding-bottom: clamp(60px, 12vh, 140px);
+    }
+    #contatti .section-inner{
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
 
-    #contatti a {
-      color: var(--green);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    #contatti a:hover {
-      text-decoration: underline;
-    }
 
     /* FOOTER */
-
     .site-footer {
-      padding: 18px 20px 24px;
-      font-size: 12px;
-      color: #6a726a;
-      background: #f0ebe1;
-      border-top: 1px solid rgba(0,0,0,0.04);
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding: 16px 20px 22px;
+      background: #f2eee7;
+      font-size: 13px;
+      color: var(--muted);
     }
-
     .footer-inner {
       max-width: 1120px;
       margin: 0 auto;
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      font-weight: 500;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    /* RESPONSIVE GENERALE */
-
-    @media (max-width: 960px) {
-      .areas-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+    /* RESPONSIVE */
+    @media (max-width: 1100px){
+      .services-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 800px) {
-      .header-inner {
-        padding-inline: 16px;
-      }
-
+      .header-inner { padding-inline: 16px; }
       .main-nav {
+        position: absolute;
+        right: 14px;
+        top: 54px;
+        flex-direction: column;
+        align-items: flex-end;
+        background: rgba(247,244,239,0.97);
+        padding: 10px 14px;
+        border-radius: 16px;
+        box-shadow: 0 14px 30px rgba(0,0,0,0.14);
         display: none;
       }
+      .main-nav.open { display: flex; }
+      .nav-toggle { display: block; }
 
-      .nav-toggle {
-        display: block;
-        color: var(--green-dark);
+      .hero { height: 100vh; min-height: 520px; }
+      .hero-inner { padding: 88px 18px 72px; }
+      .hero-cta { flex-direction: column; align-items: flex-start; }
+
+      #slogan{ padding: 14px 16px 2px; }
+      #elegant-slogan { margin: 0 auto 12px; padding: 6px 12px 0; font-size: clamp(20px, 5.5vw, 28px); line-height: 1.35; }
+
+      .marquee-track{ animation-duration: 11s; }
+      .marquee-content{ font-size: clamp(18px, 6vw, 34px); }
+
+      .profile-grid { grid-template-columns: minmax(0, 1fr); }
+
+      .services-grid{ grid-template-columns: 1fr; }
+
+      .hpanel { justify-content: center; }
+      .hpanel__content { max-width: 92vw; }
+      .hphoto { width: clamp(160px, 60vw, 320px); left: 18%; top: 56%; transform: rotate(-6deg); }
       }
-
-      .areas-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .brand {
-        font-size: 17px;
-      }
-    }
-
-    @media (max-width: 800px) {
-      .main-nav.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        right: 16px;
-        top: 56px;
-        padding: 12px 16px;
-        background: rgba(247, 245, 240, 0.98);
-        border-radius: 16px;
-        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
-      }
-    }
-
-    /* TIPOGRAFIA SU SCHERMI GRANDI (PC GRANDI) */
-
-    @media (min-width: 1200px) {
-      body {
-        font-size: 17px;
-      }
-
-      .brand {
-        font-size: 21px;
-      }
-
-      .main-nav {
-        font-size: 15px;
-      }
-
-      .hero-title {
-        font-size: clamp(40px, 3.2vw, 52px);
-      }
-
-      .hero-subtitle {
-        font-size: 16px;
-      }
-
-      .hero-text,
-      .hero-note,
-      .section-intro,
-      .profile-main-intro {
-        font-size: 16px;
-      }
-
-      .section-title {
-        font-size: 30px;
-      }
-
-      .profile-area p,
-      .area-text {
-        font-size: 14px;
-      }
-
-      #contatti h2 {
-        font-size: 24px;
-      }
-
-      #contatti p {
-        font-size: 15px;
-      }
-    }
 
     @media (prefers-reduced-motion: reduce) {
-      .profile-photo-card {
-        transition: none;
+      .hero-img, .hero-inner, #elegant-slogan { transition: none; }
+      .marquee-track{ animation: none; }
+    }
+  
+
+    /* FOTO TIMELINE: sicurezza mobile (no overlap strano) */
+    @media (max-width: 820px){
+      .hpanel{ flex-direction: column; justify-content: center; gap: 14px; }
+      .hpanel__content{ width: 100%; max-width: 520px; }
+      .hphoto{
+        position: relative;
+        top: auto; left: auto;
         transform: none;
-        opacity: 1;
+        width: min(86vw, 440px);
+        margin: 10px auto 0;
+        box-shadow: 0 18px 46px rgba(0,0,0,0.20);
       }
     }
-  </style>
+
+
+    /* === PRELOADER (logo + due lettere che brillano) === */
+    html.is-preloading,
+    body.is-preloading{
+      overflow: hidden;  /* blocca scroll finché il preload non finisce */
+      height: 100%;
+    }
+    body.is-preloading{
+      position: fixed;   /* blocco robusto anche su iOS */
+      width: 100%;
+      left: 0;
+      top: 0;
+    }
+    #preloader{
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(1200px 600px at 50% 35%, rgba(255,255,255,0.22), rgba(255,255,255,0) 55%),
+                  linear-gradient(180deg, #C7F0A8 0%, #BFE89E 45%, #C7F0A8 100%);
+      transition: opacity 1.0s ease, visibility 1.0s ease;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+    #preloader.is-done{
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .preloader-inner{
+      width: min(520px, 88vw);
+      display: grid;
+      gap: 18px;
+      justify-items: center;
+      text-align: center;
+    }
+    .preloader-logo-wrap{
+      position: relative;
+      width: min(360px, 78vw);
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      filter: drop-shadow(0 18px 40px rgba(0,0,0,0.22));
+    }
+    .preloader-logo{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: translateZ(0);
+      animation: preLogoFloat 1.8s ease-in-out infinite;
+    }
+    @keyframes preLogoFloat{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-6px); }
+    }
+
+    .preloader-initials{
+      position: absolute;
+      inset: -6%;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+      opacity: .95;
+      mix-blend-mode: soft-light;
+    }
+    .preloader-letter{
+      position: absolute;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      letter-spacing: .06em;
+      font-size: clamp(64px, 10vw, 120px);
+
+      /* base “spento” */
+      color: transparent;
+      background:
+        linear-gradient(90deg,
+          rgba(255,255,255,0.12) 0%,
+          rgba(255,255,255,0.12) 35%,
+          rgba(255,255,255,0.95) 50%,
+          rgba(255,255,255,0.12) 65%,
+          rgba(255,255,255,0.12) 100%);
+      background-size: 220% 100%;
+      background-position: -120% 0;
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      transform: translate3d(0,0,0);
+      animation: preSweep 1.05s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.15))
+              drop-shadow(0 0 26px rgba(74,123,91,0.45));
+    }
+
+    /* glow “extra” sopra, sincronizzato con la passata luminosa */
+    .preloader-letter::after{
+      content: attr(data-char);
+      position: absolute;
+      inset: 0;
+      color: rgba(255,255,255,0.25);
+      text-shadow:
+        0 0 10px rgba(255,255,255,0.25),
+        0 0 26px rgba(74,123,91,0.55),
+        0 0 54px rgba(74,123,91,0.35);
+      opacity: .18;
+      filter: blur(0.3px);
+      animation: preSweepGlow 1.05s ease-in-out infinite;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .preloader-letter.l1{ transform: translateX(-38%); animation-delay: 0ms; }
+    .preloader-letter.l1::after{ animation-delay: 0ms; }
+
+    .preloader-letter.l2{ transform: translateX(38%);  animation-delay: 180ms; }
+    .preloader-letter.l2::after{ animation-delay: 180ms; }
+
+    /* stessa logica della barra: una “passata” luminosa che scorre */
+    @keyframes preSweep{
+      0%   { background-position: -120% 0; opacity: .85; }
+      50%  { background-position: 140% 0;  opacity: 1; }
+      100% { background-position: 140% 0;  opacity: .85; }
+    }
+    @keyframes preSweepGlow{
+      0%   { opacity: .10; filter: blur(0.6px); }
+      50%  { opacity: .70; filter: blur(0.0px); }
+      100% { opacity: .10; filter: blur(0.6px); }
+    }
+
+    .preloader-bar{
+      width: min(360px, 78vw);
+      height: 6px;
+      border-radius: 999px;
+      display: none;
+      background: rgba(18,51,34,0.16);
+      overflow: hidden;
+      border: 1px solid rgba(18,51,34,0.12);
+    }
+    .preloader-bar > span{
+      display: block;
+      width: 38%;
+      height: 100%;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.78);
+      animation: preBar 1.05s ease-in-out infinite;
+    }
+    @keyframes preBar{
+      0%{ transform: translateX(-120%); }
+      50%{ transform: translateX(145%); }
+      100%{ transform: translateX(145%); }
+    }
+    @media (max-width: 600px){
+      .hero-signature-layer{
+        bottom: 18px; 
+      }
+
+
+
+      .hero-signature-wrapper{
+        width: min(300px, 80vw);
+      }
+    }
+
+</style>
 </head>
-<body>
+
+<body class="is-preloading">
+
+  <!-- PRELOADER (logo + iniziali luminose) -->
+  <div id="preloader" aria-hidden="true">
+    <div class="preloader-inner">
+      <div class="preloader-logo-wrap">
+        <img src="img/logo.jpeg" class="preloader-logo" alt="Logo Isabella Mugnaini" decoding="async">
+        <div class="preloader-initials" aria-hidden="true">
+        </div>
+      </div>
+      <div class="preloader-bar" aria-hidden="true"><span></span></div>
+    </div>
+  </div>
 
   <!-- HEADER -->
   <header class="site-header">
@@ -825,7 +724,7 @@
 
       <nav class="main-nav" id="mainNav">
         <a href="#chi-sono">Chi sono</a>
-        <a href="#aree-attivita">Aree di attività</a>
+        <a href="#assistenza">Come posso assisterti</a>
         <a href="#contatti">Contatti</a>
         <a href="#contatti" class="btn-nav">Scrivi su WhatsApp</a>
       </nav>
@@ -835,206 +734,148 @@
   <!-- HERO -->
   <div class="hero-wrapper">
     <section class="hero" aria-label="Studio legale civile e di famiglia">
-        <div class="hero-img" style="background-image:
-          url('Immsfondo1.jpg');"
-          role="img" aria-label="Paesaggio toscano con colline e cipressi"></div>
+      <div class="hero-img"
+        style="background-image: url('Img/immsfondo1.jpg');"
+        role="img"
+        aria-label="Studio legale con scaffali e libri di diritto"></div>
 
-    <div class="hero-inner">
-      <div class="hero-kicker">Diritto civile e di famiglia · Barberino Tavarnelle</div>
-      <h1 class="hero-title">Avvocato Isabella Mugnaini</h1>
-      <div class="hero-subtitle">Assistenza legale per famiglie, persone e patrimoni</div>
 
-      <p class="hero-text">
-        Supporto a privati, famiglie e professionisti nelle controversie che riguardano la
-        vita quotidiana: rapporti familiari, casa, condominio, locazioni, successioni,
-        responsabilità e crediti.
-      </p>
-      <p class="hero-note">
-        Ricevo su appuntamento e offro consulenza anche da remoto e in mediazione civile telematica.
-      </p>
+      <div class="hero-inner">
+        <div class="hero-kicker">Diritto civile e di famiglia · Barberino Tavarnelle</div>
+        <h1 class="hero-title">Avvocato Isabella Mugnaini</h1>
+        <div class="hero-subtitle">Assistenza legale per famiglie, persone e patrimoni</div>
 
-      <div class="hero-actions">
-        <a href="#contatti" class="btn-primary">Richiedi un contatto</a>
-        <a href="https://wa.me/39XXXXXXXXXX" class="btn-ghost" target="_blank" rel="noopener">
-          Scrivi su WhatsApp
-        </a>
+        <p class="hero-text">
+          Supporto a privati, famiglie e professionisti nelle controversie che riguardano la
+          vita quotidiana: rapporti familiari, casa, condominio, locazioni, successioni,
+          responsabilità e crediti.
+        </p>
+
+        <p class="hero-note">
+          Ogni incarico viene valutato insieme, con attenzione alla concretezza, ai tempi
+          e ai costi delle possibili soluzioni.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#contatti" class="btn-primary">Richiedi un contatto</a>
+          <a href="https://wa.me/39XXXXXXXXXX" class="btn-ghost" target="_blank" rel="noopener">
+            Scrivi su WhatsApp
+          </a>
+        </div>
       </div>
-    </div>
 
-      </section>
+      <!-- FIRMA REALE NEL MEZZO SOPRA LA FOTO -->
+      <div class="hero-signature-layer" aria-hidden="true">
+        <div class="hero-signature-wrapper">
+          <object id="firma-isa-hero" class="hero-signature-embed" data="firmaisabella1.svg" type="image/svg+xml"></object>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <div id="elegant-slogan">
-    &ldquo;Chiarezza, competenza e tutela quando ne hai piu bisogno.&rdquo;
-  </div>
+  <!-- SLOGAN ELEGANTE -->
+  <section id="slogan">
+    <div id="elegant-slogan"><span></span></div>
+  </section>
 
-  <!-- SEZIONE CHI SONO / PROFILO -->
+  <!-- CHI SONO (testo “scritto sullo sfondo”, senza pannello) -->
   <section class="section" id="chi-sono">
     <div class="section-inner">
-      <div class="section-profile-title">
-        <div class="section-kicker">Chi sono</div>
-        <h2 class="section-title">Al centro: famiglie, persone e relazioni quotidiane</h2>
-      </div>
+      <h2 class="section-title">Avvocato civilista in Toscana</h2>
 
-      <div class="profile-layout">
-        <!-- COLONNA TESTO -->
-        <div class="profile-main">
-          <div class="profile-scroll-hint">Scorri qui per leggere tutto</div>
-          <p class="profile-main-intro">
-            Seguo le controversie che toccano la vita quotidiana: famiglia, casa, vicinato,
-            beni e responsabilit?. Ambiti che richiedono equilibrio tra relazioni, patrimoni
-            e tempi.
+      <div class="chi-sono-text">
+        <p class="chi-sono-lead">
+          Un’assistenza concreta, con attenzione alla persona e alla ricerca di soluzioni sostenibili.
+        </p>
 
-          </p>
-
-          <div class="theme-chips">
-            <span class="theme-chip">Famiglia e persone</span>
-            <span class="theme-chip">Condominio e vicinato</span>
-            <span class="theme-chip">Locazioni e proprietà</span>
-            <span class="theme-chip">Patrimonio e successioni</span>
-            <span class="theme-chip">Responsabilità civile</span>
-            <span class="theme-chip">Bancario e crediti</span>
-          </div>
-
-          <p class="profile-comment">
-            Molte di queste controversie oggi passano prima dalla mediazione civile o dalla
-            negoziazione assistita: accompagno i clienti in questo percorso, spesso anche in
-            modalità telematica, valutando quando conviene trovare un accordo e quando è
-            necessario arrivare al giudice.
-          </p>
-
-          <div class="profile-areas">
-            <div class="profile-area">
-              <h3>Famiglia e persone</h3>
-              <p>
-                Separazioni e divorzi, affidamento e mantenimento dei figli, revisione degli
-                assegni, amministrazioni di sostegno, responsabilità genitoriale.
-              </p>
-            </div>
-
-            <div class="profile-area">
-              <h3>Condominio e rapporti di vicinato</h3>
-              <p>
-                Liti su spese condominiali e parti comuni, rumori e immissioni, infiltrazioni,
-                uso del lastrico solare, regolamenti condominiali.
-              </p>
-            </div>
-
-            <div class="profile-area">
-              <h3>Locazioni abitative e commerciali</h3>
-              <p>
-                Morosità, finita locazione, sfratti, rilascio dell’immobile, canoni concordati,
-                indennità di avviamento, affitti brevi e locazioni turistiche.
-              </p>
-            </div>
-
-            <div class="profile-area">
-              <h3>Proprietà, successioni e diritti reali</h3>
-              <p>
-                Usucapione, servitù di passaggio, confini tra fondi, azioni possessorie, divisioni
-                ereditarie, impugnazioni di testamenti e tutela dei legittimari.
-              </p>
-            </div>
-
-            <div class="profile-area">
-              <h3>Responsabilità civile e assicurazioni</h3>
-              <p>
-                Sinistri stradali, responsabilità medica e sanitaria, responsabilità professionale,
-                danni da cose in custodia o da prodotto difettoso, rapporti con le compagnie.
-              </p>
-            </div>
-
-            <div class="profile-area">
-              <h3>Bancario, finanziario e crediti</h3>
-              <p>
-                Contenzioso su mutui, conti correnti e finanziamenti, contratti d’impresa, appalti
-                privati, recupero crediti e gestione stragiudiziale delle posizioni debitorie.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- COLONNA FOTO -->
-        <aside class="profile-photo-card" aria-label="Avvocato Isabella Mugnaini">
-          <!-- metti il file giusto, es. iim1.jpg -->
-          <img src="iim1.jpg" alt="Avvocato Isabella Mugnaini in un borgo toscano">
-
-          <div class="profile-photo-overlay">
-            <div class="profile-photo-name">Avv. Isabella Mugnaini</div>
-            <div class="profile-photo-role">Avvocato civilista · Toscana</div>
-            <div class="profile-photo-note">
-              Studio a Barberino Tavarnelle, consulenza anche online e in mediazione civile.
-            </div>
-          </div>
-        </aside>
+        <p class="chi-sono-body">
+          Ricevo su appuntamento in studio a Barberino Tavarnelle e, quando utile, anche online.
+          L’obiettivo è costruire insieme un percorso chiaro: analisi, strategia e tutela dei tuoi interessi.
+          Le immagini e i momenti del percorso li raccontiamo nella sezione <strong>Percorso</strong>.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- AREE DI ATTIVITÀ -->
-  <section class="section" id="aree-attivita">
+  <!-- COME POSSO ASSISTERTI (solo pannelli servizi, accostati) -->
+  <section class="section" id="assistenza" aria-label="Come posso assisterti">
     <div class="section-inner">
-      <div class="section-kicker">Aree di attività</div>
       <h2 class="section-title">Come posso assisterti</h2>
       <p class="section-intro">
-        Valutiamo insieme la tua situazione concreta e individuiamo il percorso più adatto, con attenzione
-        ai tempi, ai costi e alla tutela dei tuoi interessi.
+        Ecco le principali aree in cui posso supportarti. Ogni pratica viene valutata caso per caso, con chiarezza su tempi e costi.
       </p>
 
-      <div class="areas-grid">
-        <article class="area-card">
-          <div class="area-tag">Famiglia e persone</div>
-          <h3 class="area-title">Diritto di famiglia</h3>
-          <p class="area-text">
-            Procedimenti di separazione e divorzio, regolamentazione dei rapporti con i figli,
-            amministrazioni di sostegno e tutela del patrimonio familiare.
-          </p>
-          <div class="area-note">Centralità della persona e dei minori.</div>
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-kicker">Area</div>
+          <h3>Diritto di famiglia</h3>
+          <p>Separazioni e divorzi, affidamento e rapporti con i figli, accordi tra coniugi e conviventi, amministrazione di sostegno, tutele e curatele.</p>
+          <div class="service-note">Centralità della persona e dei minori.</div>
         </article>
 
-        <article class="area-card">
-          <div class="area-tag">Casa e immobili</div>
-          <h3 class="area-title">Condominio e locazioni</h3>
-          <p class="area-text">
-            Controversie condominiali, affitti abitativi e commerciali, affitti brevi e locazioni
-            turistiche, sfratti per morosità e finita locazione.
-          </p>
-          <div class="area-note">Un punto fermo nei rapporti di vicinato.</div>
+        <article class="service-card">
+          <div class="service-kicker">Area</div>
+          <h3>Casa, condominio e locazioni</h3>
+          <p>Controversie condominiali, danni all’immobile, rapporti di vicinato, affitti e sfratti (morosità o finita locazione), locazioni turistiche.</p>
+          <div class="service-note">Un supporto stabile per la tua casa.</div>
         </article>
 
-        <article class="area-card">
-          <div class="area-tag">Patrimonio</div>
-          <h3 class="area-title">Successioni e diritti reali</h3>
-          <p class="area-text">
-            Usucapione, servitù, confini tra fondi, azioni possessorie, divisioni ereditarie e
-            impugnazioni di testamenti.
-          </p>
-          <div class="area-note">Tutela di beni e passaggi generazionali.</div>
+        <article class="service-card">
+          <div class="service-kicker">Area</div>
+          <h3>Successioni e diritti reali</h3>
+          <p>Divisioni ereditarie e impugnazioni di testamenti, usucapione, servitù e confini tra fondi, tutela dei beni e passaggi generazionali.</p>
+          <div class="service-note">Tutela del patrimonio e continuità familiare.</div>
         </article>
 
-        <article class="area-card">
-          <div class="area-tag">Responsabilità</div>
-          <h3 class="area-title">Responsabilità civile e crediti</h3>
-          <p class="area-text">
-            Sinistri stradali, responsabilità medica e professionale, rapporti con assicurazioni,
-            contratti bancari e finanziari, recupero crediti.
-          </p>
-          <div class="area-note">Valutazione di rischi, danni e convenienza delle azioni.</div>
+        <article class="service-card">
+          <div class="service-kicker">Area</div>
+          <h3>Responsabilità civile e crediti</h3>
+          <p>Sinistri stradali, responsabilità medica e professionale, rapporti con assicurazioni, recupero crediti e valutazione di rischi/benefici della causa.</p>
+          <div class="service-note">Scelte chiare, tempi e costi valutati insieme.</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERCORSO (orizzontale full-screen) -->
+  <section id="timeline" class="hscroll" aria-label="Percorso">
+    <div class="hscroll__sticky">
+      <div class="hscroll__track">
+
+        <article class="hpanel">
+          <div class="hphoto" style="--x:22%; --y:34%; --w: clamp(190px, 22vw, 360px);">
+            <img src="img/iim2.jpg" alt="Laurea" loading="lazy">
+          </div>
+          <div class="hphoto" style="--x:68%; --y:62%; --w: clamp(200px, 27vw, 390px);">
+            <img src="img/iim1.jpg" alt="Dettaglio laurea" loading="lazy">
+          </div>
+        </article>
+
+        <article class="hpanel">
+          <div class="hphoto" style="--x:38%; --y:54%; --w: clamp(300px, 38vw, 640px);">
+            <img src="img/iim2.jpg" alt="Praticantato" loading="lazy">
+          </div>
+        </article>
+
+        <article class="hpanel">
+          <div class="hphoto" style="--x:-10%; --y:62%; --w: clamp(220px, 30vw, 500px);">
+            <img src="img/iim1.jpg" alt="Studio" loading="lazy">
+          </div>
         </article>
       </div>
     </div>
   </section>
 
   <!-- CONTATTI -->
-  <section id="contatti">
+  <section class="section" id="contatti">
     <div class="section-inner">
-      <h2>Contatti</h2>
+      <h2 class="section-title">Contatti</h2>
       <p><strong>Studio legale Avv. Isabella Mugnaini</strong></p>
       <p>Piazza Mazzini 2 – 50028 Barberino Tavarnelle (FI)</p>
       <p>Email: <a href="mailto:info@studio-mugnaini.it">info@studio-mugnaini.it</a></p>
       <p>Telefono: <a href="tel:+390558079127">+39 055 8079127</a></p>
       <p>WhatsApp: <a href="https://wa.me/39XXXXXXXXXX" target="_blank" rel="noopener">scrivi al numero dedicato</a></p>
-      <p style="margin-top:10px;font-size:13px;">
+      <p style="margin-top:10px;font-size:13px;color:var(--muted);">
         Ricevo su appuntamento. È possibile concordare anche colloqui online.
       </p>
     </div>
@@ -1048,6 +889,283 @@
     </div>
   </footer>
 
+  <!-- SCRIPT -->
+  <script>
+  (() => {
+    const canvas = document.getElementById("bg-animated");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d", { alpha: false });
+    ctx.imageSmoothingEnabled = true;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const BG_GREEN = "#C7F0A8";
+    const BG_WHITE = "#FFFFFF";
+
+    // Colori linee: verde (default) -> bianco (durante orizzontale)
+    const LINE_A_G = [255,255,255,0.26];
+    const LINE_B_G = [255,255,255,0.14];
+    const ACCENT_G = [185,255, 80,0.10];
+
+    // su sfondo bianco uso linee più scure/verdine (stesso effetto, più leggibile)
+    const LINE_A_W = [18, 51, 34,0.22];
+    const LINE_B_W = [18, 51, 34,0.12];
+    const ACCENT_W = [74,123, 92,0.14];
+
+    let bgMix = 0; // 0 = verde, 1 = bianco
+
+    const _hexToRgb = (hex) => {
+      const h = hex.replace('#','').trim();
+      const n = parseInt(h.length===3 ? h.split('').map(c=>c+c).join('') : h, 16);
+      return [(n>>16)&255, (n>>8)&255, n&255];
+    };
+    const _mixArr = (a,b,t) => a.map((v,i)=> v + (b[i]-v)*t);
+    const _mixHex = (h1,h2,t) => {
+      const a=_hexToRgb(h1), b=_hexToRgb(h2);
+      const m=_mixArr(a,b,t).map(x=>Math.round(x));
+      return `rgb(${m[0]},${m[1]},${m[2]})`;
+    };
+    const _rgba = (v) => `rgba(${v[0]},${v[1]},${v[2]},${v[3]})`;
+
+    // Render a risoluzione ridotta (molto più fluido)
+    const low = document.createElement("canvas");
+    const lctx = low.getContext("2d", { alpha: false });
+    lctx.imageSmoothingEnabled = true;
+
+    let w=0,h=0,dpr=1, lw=0, lh=0, scale=0.75;
+    let t = 0;
+
+    // scroll “liquido” (inertia)
+    let sy = 0, sySmooth = 0, prevSySmooth = 0;
+    let flowX = 0, flowY = 0;
+
+    // griglia per marching squares
+    let step = 22;      // in px del low-canvas
+    let cols = 0, rows = 0;
+    let values = null;
+
+    const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+    const lerp = (a,b,k) => a + (b-a)*k;
+
+    function resize(){
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = Math.floor(innerWidth * dpr);
+      h = Math.floor(innerHeight * dpr);
+      canvas.width = w;
+      canvas.height = h;
+
+      // scala render (meno su mobile)
+      scale = innerWidth < 700 ? 0.60 : 0.75;
+
+      lw = Math.max(2, Math.floor(w * scale));
+      lh = Math.max(2, Math.floor(h * scale));
+      low.width = lw;
+      low.height = lh;
+
+      // step dinamico (più grande = più leggero)
+      step = innerWidth < 700 ? Math.floor(30 * scale * dpr) : Math.floor(24 * scale * dpr);
+      step = Math.max(14, step);
+
+      cols = Math.floor(lw / step) + 1;
+      rows = Math.floor(lh / step) + 1;
+      values = new Float32Array(cols * rows);
+
+      ctx.imageSmoothingEnabled = true;
+    }
+
+    // Onde liquide: grandi onde + leggero “warp” (acqua/gel), niente effetto bolle
+    function field(x, y, time){
+      // Frequenza più bassa = onde più larghe e pulite
+      const nx = x * 0.005;
+      const ny = y * 0.005;
+
+      // tempo
+      const t = time;
+
+      // “warp” morbido (fa sembrare liquido, non geometrico)
+      const warp =
+        Math.sin((nx + ny) * 0.55 + t * 0.35) * 0.45 +
+        Math.sin((nx - ny) * 0.60 - t * 0.28) * 0.35;
+
+      const X = nx + warp + flowX;
+      const Y = ny + warp * 0.9 + flowY;
+
+      // Due onde principali, direzioni diverse (effetto ondeggiante vero)
+      const w1 = Math.sin(Y * 1.15 + t * 0.85);
+      const w2 = Math.sin(X * 0.95 - t * 0.55);
+
+      // Increspatura leggerissima (non “rumore”)
+      const rip = Math.sin((X + Y) * 0.70 + t * 0.40) * 0.35;
+
+      // Range compatibile con le tue soglie
+      return (w1 * 0.60 + w2 * 0.40 + rip * 0.25) * 0.45;
+    }
+
+
+    function computeField(time){
+      let k = 0;
+      for (let j=0; j<rows; j++){
+        const y = j * step;
+        for (let i=0; i<cols; i++){
+          const x = i * step;
+          values[k++] = field(x, y, time);
+        }
+      }
+    }
+
+    // marching squares con INTERPOLAZIONE (linee molto più morbide, niente “scalini”)
+    function drawIsolines(threshold){
+      const EPS = 1e-6;
+
+      // t in [0..1] dove la soglia “taglia” tra v1 e v2
+      const interp = (v1, v2) => {
+        const dv = v2 - v1;
+        if (Math.abs(dv) < EPS) return 0.5;
+        return (threshold - v1) / dv;
+      };
+
+      for (let j=0; j<rows-1; j++){
+        const y = j * step;
+        const rowOff  = j * cols;
+        const rowOffN = (j+1) * cols;
+
+        for (let i=0; i<cols-1; i++){
+          const x = i * step;
+
+          const vTL = values[rowOff  + i];
+          const vTR = values[rowOff  + i + 1];
+          const vBR = values[rowOffN + i + 1];
+          const vBL = values[rowOffN + i];
+
+          const a = vTL > threshold ? 1 : 0; // TL
+          const b = vTR > threshold ? 1 : 0; // TR
+          const c = vBR > threshold ? 1 : 0; // BR
+          const d = vBL > threshold ? 1 : 0; // BL
+          const state = (a<<3) | (b<<2) | (c<<1) | d;
+
+          if (state === 0 || state === 15) continue;
+
+          // punti interpolati sui 4 lati
+          const tTop    = interp(vTL, vTR);
+          const tRight  = interp(vTR, vBR);
+          const tBottom = interp(vBL, vBR);
+          const tLeft   = interp(vTL, vBL);
+
+          const pTop    = { x: x + step * tTop,    y: y };
+          const pRight  = { x: x + step,          y: y + step * tRight };
+          const pBottom = { x: x + step * tBottom,y: y + step };
+          const pLeft   = { x: x,                 y: y + step * tLeft };
+
+          lctx.beginPath();
+
+          // casi standard
+          switch(state){
+            case 1:  case 14: lctx.moveTo(pLeft.x, pLeft.y);     lctx.lineTo(pBottom.x, pBottom.y); break;
+            case 2:  case 13: lctx.moveTo(pBottom.x, pBottom.y); lctx.lineTo(pRight.x, pRight.y);   break;
+            case 3:  case 12: lctx.moveTo(pLeft.x, pLeft.y);     lctx.lineTo(pRight.x, pRight.y);   break;
+            case 4:  case 11: lctx.moveTo(pTop.x, pTop.y);       lctx.lineTo(pRight.x, pRight.y);   break;
+            case 6:  case 9:  lctx.moveTo(pTop.x, pTop.y);       lctx.lineTo(pBottom.x, pBottom.y); break;
+            case 7:  case 8:  lctx.moveTo(pTop.x, pTop.y);       lctx.lineTo(pLeft.x, pLeft.y);     break;
+
+            // ambigui: 5 e 10 → “asymptotic decider” (risultato più naturale)
+            case 5: {
+              const center = (vTL + vTR + vBR + vBL) * 0.25;
+              if (center > threshold){
+                lctx.moveTo(pTop.x, pTop.y);     lctx.lineTo(pRight.x, pRight.y);
+                lctx.moveTo(pLeft.x, pLeft.y);   lctx.lineTo(pBottom.x, pBottom.y);
+              } else {
+                lctx.moveTo(pTop.x, pTop.y);     lctx.lineTo(pLeft.x, pLeft.y);
+                lctx.moveTo(pRight.x, pRight.y); lctx.lineTo(pBottom.x, pBottom.y);
+              }
+              break;
+            }
+            case 10: {
+              const center = (vTL + vTR + vBR + vBL) * 0.25;
+              if (center > threshold){
+                lctx.moveTo(pTop.x, pTop.y);     lctx.lineTo(pLeft.x, pLeft.y);
+                lctx.moveTo(pRight.x, pRight.y); lctx.lineTo(pBottom.x, pBottom.y);
+              } else {
+                lctx.moveTo(pTop.x, pTop.y);     lctx.lineTo(pRight.x, pRight.y);
+                lctx.moveTo(pLeft.x, pLeft.y);   lctx.lineTo(pBottom.x, pBottom.y);
+              }
+              break;
+            }
+          }
+
+          lctx.stroke();
+        }
+      }
+    }
+
+
+    function render(now){
+      // dt in secondi
+      const dt = Math.min(0.05, (now - (render._last || now)) / 1000);
+      render._last = now;
+
+      sy = window.scrollY || 0;
+      sySmooth = lerp(sySmooth, sy, 0.12);
+      const dsy = (sySmooth - prevSySmooth);
+      prevSySmooth = sySmooth;
+
+      // Modalità sfondo: verde (default) -> bianco durante lo scorrimento orizzontale
+      const _targetBg = document.documentElement.classList.contains('hscroll-white') ? 1 : 0;
+      bgMix = lerp(bgMix, _targetBg, 0.08);
+
+      const bgFill = _mixHex(BG_GREEN, BG_WHITE, bgMix);
+      const lineA  = _rgba(_mixArr(LINE_A_G, LINE_A_W, bgMix));
+      const lineB  = _rgba(_mixArr(LINE_B_G, LINE_B_W, bgMix));
+      const accent = _rgba(_mixArr(ACCENT_G, ACCENT_W, bgMix));
+
+      // lo scroll “spinge” il campo (sensazione liquida)
+      const push = clamp(dsy * 0.0006, -0.08, 0.08);
+      flowX = lerp(flowX, flowX + push * 0.25, 0.08);
+      flowY = lerp(flowY, flowY + push * 0.55, 0.08);
+
+      if (!reduced) t += dt * 0.9; // velocità base
+
+      // clear + bg
+      lctx.fillStyle = bgFill;
+      lctx.fillRect(0,0,lw,lh);
+
+      // calcola campo 1 volta sola / frame
+      computeField(t);
+
+      // Stile linee: su bianco evitiamo l'effetto “puntinato” usando cap non arrotondato
+      lctx.lineCap = (bgMix > 0.45) ? "butt" : "round";
+      lctx.lineJoin = "round";
+
+      const levels = [-0.32, -0.12, 0.08, 0.28, 0.48];
+
+      // pass soft (più spesso)
+      lctx.lineWidth = 1.8;
+      lctx.strokeStyle = lineB;
+      for (let k=0; k<levels.length; k++) drawIsolines(levels[k]);
+
+      // pass principale (molto più marcato)
+      lctx.lineWidth = 2.8;
+      lctx.strokeStyle = lineA;
+      drawIsolines(-0.30);
+      drawIsolines(0.06);
+
+      // accento verdino (un filo più presente)
+      lctx.lineWidth = 1.6;
+      lctx.strokeStyle = accent;
+      drawIsolines(0.42);
+
+
+      // copia sul canvas principale (upscale)
+      ctx.drawImage(low, 0, 0, w, h);
+
+      requestAnimationFrame(render);
+    }
+
+    addEventListener("resize", resize);
+    resize();
+    requestAnimationFrame(render);
+  })();
+</script>
+
   <script>
     function toggleNav() {
       const nav = document.getElementById('mainNav');
@@ -1057,43 +1175,174 @@
     const heroSection = document.querySelector('.hero');
     const heroWrapper = document.querySelector('.hero-wrapper');
     const heroImg = document.querySelector('.hero-img');
+
     const slogan = document.getElementById('elegant-slogan');
     const sloganSpan = slogan ? slogan.querySelector('span') : null;
-    const mqNarrow = window.matchMedia('(max-width: 800px)');
-    const sloganText = '"Chiarezza, competenza e tutela quando ne hai piu bisogno."';
-    const profileSection = document.getElementById('chi-sono');
-    const profilePhotoCard = document.querySelector('.profile-photo-card');
+    const sloganText = '"Chiarezza, competenza e tutela quando ne hai più bisogno."';
 
-    let typingTimer = null;
-    let typedLength = 0;
-    const typeDelay = 45;
+    const mqNarrow = window.matchMedia('(max-width: 800px)');
+
+    /* MARQUEE dietro la foto */
+    const marqueeEl = document.querySelector('.hero-marquee');
+
+    /* FIRMA CENTRALE NELLA HERO */
+    const signatureLayer = document.querySelector('.hero-signature-layer');
+    const signatureEmbed = document.getElementById('firma-isa-hero');
+    const signatureWrapper = document.querySelector('.hero-signature-wrapper');
+
+    let signaturePen = null;
+    let signatureMaskPaths = [];
+    let signatureLengths = [];
+    let signatureTotalLength = 0;
+    let signatureReady = false;
+
+    function prepareSignature(svgDoc) {
+      const svg = svgDoc.querySelector('svg');
+      if (!svg) return;
+
+      const ink = '#000000';
+
+      const originalPaths = Array.from(svg.querySelectorAll('path'))
+        .filter(p => typeof p.getTotalLength === 'function');
+
+      if (!originalPaths.length) return;
+
+      const isStrokeBased = originalPaths.some(p => {
+        const f = (p.getAttribute('fill') || '').trim().toLowerCase();
+        const s = (p.getAttribute('stroke') || '').trim().toLowerCase();
+        return (f === 'none' || f === '') && s !== '' && s !== 'none';
+      });
+
+      signatureMaskPaths = [];
+      signatureLengths = [];
+      signatureTotalLength = 0;
+      signaturePen = null;
+
+      if (isStrokeBased) {
+        // Nota: anche se l'SVG è basato su stroke, forziamo la versione "piena" (fill)
+        // usando la maschera qui sotto, per evitare l'effetto "solo contorni".
+      }
+
+      const gFill = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'g');
+      gFill.setAttribute('id', 'sigFill');
+
+      originalPaths.forEach(p => {
+        p.style.fill = ink;
+        p.style.stroke = 'none';
+        gFill.appendChild(p);
+      });
+      svg.appendChild(gFill);
+
+      let defs = svg.querySelector('defs');
+      if (!defs) {
+        defs = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        svg.insertBefore(defs, svg.firstChild);
+      }
+
+      const mask = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'mask');
+      mask.setAttribute('id', 'sigRevealMask');
+
+      const rect = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rect.setAttribute('x', '0');
+      rect.setAttribute('y', '0');
+      rect.setAttribute('width', '100%');
+      rect.setAttribute('height', '100%');
+      rect.setAttribute('fill', 'black');
+      mask.appendChild(rect);
+
+      const MIN_LEN = 25;
+
+      const tmp = originalPaths.map((src) => {
+        const p = src.cloneNode(true);
+        p.style.fill = 'none';
+        p.style.stroke = 'white';
+        p.style.strokeLinecap = 'round';
+        p.style.strokeLinejoin = 'round';
+        p.style.strokeWidth = '30';
+
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = String(len);
+        p.style.strokeDashoffset = String(len);
+
+        let s = {x: 0, y: 0}, e = {x: 0, y: 0};
+        try { s = p.getPointAtLength(0); } catch (e2) {}
+        try { e = p.getPointAtLength(len); } catch (e2) {}
+
+        return { p, len, sx: s.x, sy: s.y, ex: e.x, ey: e.y };
+      }).filter(o => o.len >= MIN_LEN);
+
+      tmp.sort((a,b) => a.sx - b.sx);
+      const ordered = [];
+      let cur = tmp.shift();
+      if (cur) ordered.push(cur);
+      let cx = cur ? cur.ex : 0, cy = cur ? cur.ey : 0;
+
+      while (tmp.length) {
+        let bestIdx = 0, bestD = Infinity;
+        for (let i = 0; i < tmp.length; i++) {
+          const dx = tmp[i].sx - cx;
+          const dy = tmp[i].sy - cy;
+          const d = dx*dx + dy*dy;
+          if (d < bestD) { bestD = d; bestIdx = i; }
+        }
+        cur = tmp.splice(bestIdx, 1)[0];
+        ordered.push(cur);
+        cx = cur.ex; cy = cur.ey;
+      }
+
+      ordered.forEach(({ p, len }) => {
+        mask.appendChild(p);
+        signatureMaskPaths.push(p);
+        signatureLengths.push(len);
+        signatureTotalLength += len;
+      });
+
+      defs.appendChild(mask);
+      gFill.setAttribute('mask', 'url(#sigRevealMask)');
+
+      signatureReady = signatureMaskPaths.length > 0 && signatureTotalLength > 0;
+    }
+
+    if (signatureEmbed && 'addEventListener' in signatureEmbed) {
+      signatureEmbed.addEventListener('load', () => {
+        const svgDoc = signatureEmbed.contentDocument;
+        if (!svgDoc) return;
+        prepareSignature(svgDoc);
+        handleHeroScroll();
+      });
+    }
 
     let scrollConfig = {
       hideTextAt: 0.15,
-      scaleFactor: 0.5,
+      scaleFactor: 0.34,
       translateMax: 120,
       shrinkAt: 0.7,
       sloganAt: 0.88,
+      signatureAt: 0.55,
+      signatureFullAt: 0.95
     };
 
     function updateScrollConfig() {
       const narrow = mqNarrow.matches;
       scrollConfig = {
         hideTextAt: narrow ? 0.12 : 0.15,
-        scaleFactor: narrow ? 0.35 : 0.5,
+        scaleFactor: narrow ? 0.25 : 0.34,
         translateMax: narrow ? 80 : 120,
         shrinkAt: narrow ? 0.6 : 0.7,
-        sloganAt: narrow ? 0.82 : 0.88,
+        sloganAt: narrow ? 0.18 : 0.88,
+        signatureAt: narrow ? 0.0 : 0.55,
+        signatureFullAt: narrow ? 0.20 : 0.95
       };
     }
     updateScrollConfig();
     mqNarrow.addEventListener('change', updateScrollConfig);
 
+    let typingTimer = null;
+    let typedLength = 0;
+    const typeDelay = 60;
+
     function resetTyping() {
-      if (typingTimer) {
-        clearInterval(typingTimer);
-        typingTimer = null;
-      }
+      if (typingTimer) { clearInterval(typingTimer); typingTimer = null; }
       typedLength = 0;
       if (sloganSpan) sloganSpan.textContent = '';
     }
@@ -1111,57 +1360,94 @@
       }, typeDelay);
     }
 
-    if (profileSection && profilePhotoCard) {
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting && entry.intersectionRatio > 0.18) {
-                profilePhotoCard.classList.add('show');
-              } else {
-                profilePhotoCard.classList.remove('show');
-              }
-            });
-          },
-          { threshold: [0, 0.18, 0.32] }
-        );
-        observer.observe(profileSection);
-      } else {
-        profilePhotoCard.classList.add('show');
-      }
-    }
-
     function handleHeroScroll() {
       if (!heroSection || !heroWrapper) return;
 
       const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
       const wrapperTop = heroWrapper.offsetTop;
       const scrolled = window.scrollY - wrapperTop;
-      const progress = Math.min(1, Math.max(0, wrapperHeight > 0 ? scrolled / wrapperHeight : 0));
 
-      if (progress > scrollConfig.hideTextAt) {
-        heroSection.classList.add('hide-text');
-      } else {
-        heroSection.classList.remove('hide-text');
+      let progress = Math.min(1, Math.max(0, wrapperHeight > 0 ? scrolled / wrapperHeight : 0));
+      if (mqNarrow.matches) {
+        progress = Math.max(progress, 0.22);
       }
 
-      const scale = 1 - (progress * scrollConfig.scaleFactor);
+      heroSection.classList.toggle('hide-text', progress > scrollConfig.hideTextAt);
+
+      const scale = 1 - progress * scrollConfig.scaleFactor;
       const translateY = progress * scrollConfig.translateMax;
+      if (heroImg) heroImg.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
 
-      if (heroImg) {
-        heroImg.style.transform = `translateY(${translateY}px) scale(${scale})`;
+      const sigMult = 1; // la firma NON deve scalare come la hero
+      if (signatureWrapper) signatureWrapper.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale * sigMult})`;
+
+
+      heroSection.classList.toggle('shrink', progress > scrollConfig.shrinkAt);
+
+      if (signatureLayer && signatureEmbed) {
+        if (progress >= scrollConfig.signatureAt) {
+          heroSection.classList.add('show-signature');
+
+          let localP = Math.min(1, (progress - scrollConfig.signatureAt) / (scrollConfig.signatureFullAt - scrollConfig.signatureAt || 0.0001));
+          if (localP < 0) localP = 0;
+
+          const sigScale = 0.9 + localP * 0.15;
+          const rotate = -3 + localP * 6;
+          signatureEmbed.style.transform = 'rotate(-4deg)';
+          signatureEmbed.style.opacity = 1;
+
+          if (signatureReady) {
+            const eased = localP * localP * (3 - 2 * localP);
+            let drawLength = signatureTotalLength * eased;
+
+            signatureMaskPaths.forEach((path, i) => {
+              const len = signatureLengths[i];
+              if (drawLength >= len) {
+                path.style.strokeDashoffset = "0";
+                drawLength -= len;
+              } else {
+                path.style.strokeDashoffset = String(len - drawLength);
+                drawLength = 0;
+              }
+            });
+          }
+        } else {
+          heroSection.classList.remove('show-signature');
+          signatureEmbed.style.transform = 'rotate(0deg)';
+          signatureEmbed.style.opacity = 0;
+
+          if (signatureReady) {
+            signatureMaskPaths.forEach((path, i) => path.style.strokeDashoffset = String(signatureLengths[i]));
+          }
+        }
       }
 
-      if (progress > scrollConfig.shrinkAt) {
-        heroSection.classList.add('shrink');
-      } else {
-        heroSection.classList.remove('shrink');
+      /* Marquee: compare mentre la hero si rimpicciolisce (sincronizzato con la firma)
+         e, quando la foto ha quasi finito di rimpicciolirsi, si posiziona appena sopra la foto (non dietro). */
+      if (marqueeEl) {
+        const startAt = scrollConfig.shrinkAt;
+        const endAt   = scrollConfig.signatureFullAt;
+        let mp = (progress - startAt) / (endAt - startAt || 0.0001);
+        mp = Math.min(1, Math.max(0, mp));
+        marqueeEl.style.setProperty('--marqueeOpacity', String(mp));
+
+        // solo nella parte finale: posiziona la scritta subito sopra la “card” dell’immagine
+        if (mp > 0.92 && heroImg) {
+          const imgRect  = heroImg.getBoundingClientRect();
+          const heroRect = heroSection.getBoundingClientRect();
+          const gap = mqNarrow.matches ? 10 : 16;
+          const desiredTop = (imgRect.top - heroRect.top) - marqueeEl.offsetHeight - gap;
+          marqueeEl.style.top = `${Math.max(12, desiredTop)}px`;
+        } else {
+          // durante la transizione resta più in alto (valore CSS)
+          marqueeEl.style.top = '';
+        }
       }
 
       if (slogan) {
-        if (progress > scrollConfig.sloganAt) {
+        if (progress >= scrollConfig.sloganAt) {
           slogan.classList.add('show');
-          startTyping();
+          if (!typingTimer && typedLength === 0) startTyping();
         } else {
           slogan.classList.remove('show');
           resetTyping();
@@ -1169,11 +1455,188 @@
       }
     }
 
-    window.addEventListener('scroll', handleHeroScroll);
+    let _heroTicking = false;
+    function _onHeroScroll() {
+      if (_heroTicking) return;
+      _heroTicking = true;
+      requestAnimationFrame(() => {
+        _heroTicking = false;
+        handleHeroScroll();
+      });
+    }
 
-    document.getElementById('year').textContent = new Date().getFullYear();
+    window.addEventListener('scroll', _onHeroScroll, { passive: true });
+    window.addEventListener('resize', _onHeroScroll);
+document.addEventListener('DOMContentLoaded', () => {
+      const yearSpan = document.getElementById('year');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+      handleHeroScroll();
+    });
+  </script>
 
-    handleHeroScroll();
+    <!-- HORIZONTAL TIMELINE -->
+  <script>
+    (() => {
+      const section = document.getElementById('timeline');
+      if (!section) return;
+
+      const sticky = section.querySelector('.hscroll__sticky');
+      const track  = section.querySelector('.hscroll__track');
+      if (!sticky || !track) return;
+
+      let maxX = 0;
+      let start = 0;
+      let end = 0;
+      let moveStart = 0; // inizio reale del movimento (ritardato di poco)
+
+      let targetX = 0;
+      let currentX = 0;
+      let ticking = false;
+
+      const lerp = (a,b,k) => a + (b-a)*k;
+
+      function recalc() {
+        // Lunghezza reale dello scorrimento orizzontale
+        maxX = Math.max(0, track.scrollWidth - window.innerWidth);
+
+        // Taglia la “coda” vuota finale (così Contatti arriva subito dopo l’ultima foto)
+        // Aumenta/diminuisci (0.30–0.60) per regolare quanto “anticipare” la fine.
+        const tailCut = Math.round(window.innerWidth * (window.innerWidth < 820 ? 0.28 : 0.42));
+        maxX = Math.max(0, maxX - tailCut);
+        const extraPad = Math.round(window.innerHeight * 0.00);
+        // ritardo piccolo: la prima foto non “è già lì” e il movimento orizzontale parte dopo un attimo
+        const delay = 0; // start subito: nessuna pagina vuota prima delle foto
+
+        section.style.height = (window.innerHeight + maxX + extraPad + delay) + 'px';
+
+        const rect = section.getBoundingClientRect();
+        start = window.scrollY + rect.top;
+        moveStart = start + delay;
+        end   = start + maxX + delay;
+
+        // riallinea subito
+        onScroll();
+      }
+
+      function onScroll(){
+        const y = window.scrollY;
+        const p = (end === moveStart) ? 0 : Math.min(1, Math.max(0, (y - moveStart) / (end - moveStart)));
+        targetX = -maxX * p;
+
+        // sfondo: da qui in poi resta bianco (torna verde solo se risali sopra l'inizio del percorso)
+        const whiteMode = (y >= start);
+        document.documentElement.classList.toggle('hscroll-white', whiteMode);
+
+        // fa comparire le prime foto solo dopo il piccolo ritardo
+        section.classList.toggle('timeline-started', y >= (start - window.innerHeight * 0.25));
+if (!ticking){
+          ticking = true;
+          requestAnimationFrame(tick);
+        }
+      }
+
+      function tick(){
+        // easing “liquido”: segue ma non a scatti
+        currentX = lerp(currentX, targetX, 0.14);
+        track.style.transform = `translate3d(${currentX.toFixed(2)}px,0,0)`;
+
+        if (Math.abs(targetX - currentX) > 0.2){
+          requestAnimationFrame(tick);
+        } else {
+          currentX = targetX;
+          track.style.transform = `translate3d(${currentX.toFixed(2)}px,0,0)`;
+          ticking = false;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', recalc);
+      window.addEventListener('load', recalc);
+      recalc();
+    })();
+</script>
+
+  <!-- PRELOADER SCRIPT -->
+  <script>
+    (() => {
+      const pre = document.getElementById('preloader');
+      if (!pre) return;
+
+
+// Blocca qualsiasi scroll finché il preload non è finito
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+const preventKeys = new Set(['ArrowDown','ArrowUp','PageDown','PageUp','Space','Home','End']);
+const onWheel = (e) => { e.preventDefault(); };
+const onTouch = (e) => { e.preventDefault(); };
+const onKey = (e) => { if (preventKeys.has(e.code)) e.preventDefault(); };
+
+function lockScroll(){
+  document.documentElement.classList.add('is-preloading');
+  document.body.classList.add('is-preloading');
+  // assicura che la pagina parta sempre dalla home
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  window.scrollTo(0, 0);
+
+  window.addEventListener('wheel', onWheel, { passive: false });
+  window.addEventListener('touchmove', onTouch, { passive: false });
+  window.addEventListener('keydown', onKey, { passive: false });
+}
+
+function unlockScroll(){
+  window.removeEventListener('wheel', onWheel);
+  window.removeEventListener('touchmove', onTouch);
+  window.removeEventListener('keydown', onKey);
+
+  document.documentElement.classList.remove('is-preloading');
+  document.body.classList.remove('is-preloading');
+
+  // dopo il preload: sempre in cima (home)
+  window.scrollTo(0, 0);
+}
+
+lockScroll();
+      const img = pre.querySelector('img');
+      const minShowMs = 3000;
+      const started = performance.now();
+
+      const waitImg = (() => {
+        if (!img) return Promise.resolve();
+        if (img.decode) return img.decode().catch(() => {});
+        return new Promise((res) => {
+          if (img.complete) return res();
+          img.addEventListener('load', () => res(), { once: true });
+          img.addEventListener('error', () => res(), { once: true });
+        });
+      })();
+
+      const waitFonts = (document.fonts && document.fonts.ready)
+        ? document.fonts.ready.catch(() => {})
+        : Promise.resolve();
+
+      const waitLoad = new Promise((res) => {
+        if (document.readyState === 'complete') return res();
+        window.addEventListener('load', () => res(), { once: true });
+      });
+
+      function finish(){
+        pre.classList.add('is-done');
+        unlockScroll();
+        // rimuove dal DOM dopo la dissolvenza
+        setTimeout(() => { try { pre.remove(); } catch(e) {} }, 650);
+      }
+
+      Promise.all([waitImg, waitFonts, waitLoad]).then(() => {
+        const elapsed = performance.now() - started;
+        const delay = Math.max(0, minShowMs - elapsed);
+        setTimeout(finish, delay);
+      });
+
+      // fallback sicurezza: se qualcosa va storto, sblocca comunque dopo 3s
+      setTimeout(() => {
+        if (!pre.classList.contains('is-done')) finish();
+      }, 5000);
+    })();
   </script>
 
 </body>
