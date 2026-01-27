@@ -1329,9 +1329,9 @@
         scaleFactor: narrow ? 0.25 : 0.34,
         translateMax: narrow ? 80 : 120,
         shrinkAt: narrow ? 0.6 : 0.7,
-        sloganAt: narrow ? 0.18 : 0.88,
-        signatureAt: narrow ? 0.0 : 0.55,
-        signatureFullAt: narrow ? 0.20 : 0.95
+        sloganAt: narrow ? 0.82 : 0.88,
+        signatureAt: narrow ? 0.50 : 0.55,
+        signatureFullAt: narrow ? 0.90 : 0.95
       };
     }
     updateScrollConfig();
@@ -1367,10 +1367,7 @@
       const wrapperTop = heroWrapper.offsetTop;
       const scrolled = window.scrollY - wrapperTop;
 
-      let progress = Math.min(1, Math.max(0, wrapperHeight > 0 ? scrolled / wrapperHeight : 0));
-      if (mqNarrow.matches) {
-        progress = Math.max(progress, 0.22);
-      }
+      const progress = Math.min(1, Math.max(0, wrapperHeight > 0 ? scrolled / wrapperHeight : 0));
 
       heroSection.classList.toggle('hide-text', progress > scrollConfig.hideTextAt);
 
@@ -1385,7 +1382,7 @@
       heroSection.classList.toggle('shrink', progress > scrollConfig.shrinkAt);
 
       if (signatureLayer && signatureEmbed) {
-        if (progress >= scrollConfig.signatureAt) {
+        if (progress > scrollConfig.signatureAt) {
           heroSection.classList.add('show-signature');
 
           let localP = Math.min(1, (progress - scrollConfig.signatureAt) / (scrollConfig.signatureFullAt - scrollConfig.signatureAt || 0.0001));
@@ -1445,7 +1442,7 @@
       }
 
       if (slogan) {
-        if (progress >= scrollConfig.sloganAt) {
+        if (progress > scrollConfig.sloganAt) {
           slogan.classList.add('show');
           if (!typingTimer && typedLength === 0) startTyping();
         } else {
