@@ -238,6 +238,10 @@
       opacity: 1;
       transform: translate(-50%, 0);
     }
+    .hero-signature-layer.show-signature {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
 
 
     /* Quando compare la firma: la foto va leggermente in secondo piano */
@@ -697,6 +701,15 @@
         width: min(300px, 80vw);
       }
     }
+    @media (max-width: 600px){
+      #slogan .hero-signature-layer{
+        position: relative;
+        left: 50%;
+        bottom: auto;
+        margin-top: 8px;
+        transform: translate(-50%, 0);
+      }
+    }
 
 </style>
 </head>
@@ -776,6 +789,7 @@
   <!-- SLOGAN ELEGANTE -->
   <section id="slogan">
     <div id="elegant-slogan"><span></span></div>
+    <div id="slogan-signature-slot" aria-hidden="true"></div>
   </section>
 
   <!-- CHI SONO (testo “scritto sullo sfondo”, senza pannello) -->
@@ -1189,6 +1203,9 @@
     const signatureLayer = document.querySelector('.hero-signature-layer');
     const signatureEmbed = document.getElementById('firma-isa-hero');
     const signatureWrapper = document.querySelector('.hero-signature-wrapper');
+    const sloganSignatureSlot = document.getElementById('slogan-signature-slot');
+    const signatureHome = signatureLayer ? signatureLayer.parentElement : null;
+    const signatureHomeNext = signatureLayer ? signatureLayer.nextSibling : null;
 
     let signaturePen = null;
     let signatureMaskPaths = [];
@@ -1336,6 +1353,20 @@
     }
     updateScrollConfig();
     mqNarrow.addEventListener('change', updateScrollConfig);
+    function placeSignatureForViewport() {
+      if (!signatureLayer) return;
+      if (mqNarrow.matches && sloganSignatureSlot) {
+        sloganSignatureSlot.appendChild(signatureLayer);
+      } else if (signatureHome) {
+        if (signatureHomeNext && signatureHomeNext.parentNode === signatureHome) {
+          signatureHome.insertBefore(signatureLayer, signatureHomeNext);
+        } else {
+          signatureHome.appendChild(signatureLayer);
+        }
+      }
+    }
+    placeSignatureForViewport();
+    mqNarrow.addEventListener('change', placeSignatureForViewport);
 
     let typingTimer = null;
     let typedLength = 0;
@@ -1384,6 +1415,7 @@
       if (signatureLayer && signatureEmbed) {
         if (progress > scrollConfig.signatureAt) {
           heroSection.classList.add('show-signature');
+          signatureLayer.classList.add('show-signature');
 
           let localP = Math.min(1, (progress - scrollConfig.signatureAt) / (scrollConfig.signatureFullAt - scrollConfig.signatureAt || 0.0001));
           if (localP < 0) localP = 0;
@@ -1410,6 +1442,7 @@
           }
         } else {
           heroSection.classList.remove('show-signature');
+          signatureLayer.classList.remove('show-signature');
           signatureEmbed.style.transform = 'rotate(0deg)';
           signatureEmbed.style.opacity = 0;
 
