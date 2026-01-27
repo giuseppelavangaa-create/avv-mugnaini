@@ -9,8 +9,8 @@
 
   <style>
     :root {
-      --bg: #ffffffc1;
-      
+      --bg: #f7f4ef;
+
       --green: #4a7b5b;
       --green-dark: #123322;
       --green-soft: rgba(74,123,91,0.09);
@@ -35,7 +35,7 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      opacity: .10;
+      opacity: .05;
       mix-blend-mode: overlay;
       background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
@@ -101,6 +101,9 @@
       border-radius: 0;
       z-index: 2;
     }
+
+
+
     .hero-inner {
       position: relative;
       z-index: 3;
@@ -117,7 +120,11 @@
     .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
 
     .hero.hide-text .hero-inner { opacity: 0; transition: opacity 0.25s ease-out; }
-    .hero.shrink .hero-img { border-radius: 28px; box-shadow: 0 26px 60px rgba(0, 0, 0, 0.26); }
+    .hero.shrink .hero-img {
+    border-radius: 28px;
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.26);
+    border: 1px solid rgba(255,255,255,0.22);
+    }
 
     /* MARQUEE (stesso stile: scorre orizzontale, ma POSIZIONATO SOPRA la foto quando si rimpicciolisce) */
     .hero-marquee{
@@ -187,7 +194,7 @@
       position: absolute;
 
       left: 50%;
-      bottom: clamp(40px, 9vh, 90px);
+      bottom: clamp(100px, 9vh, 90px);
 
       display: flex;
       align-items: center;
@@ -216,7 +223,7 @@
 
       overflow: visible;
 
-      filter: drop-shadow(0 10px 22px rgba(0,0,0,0.45));
+     filter: drop-shadow(0 6px 16px rgba(0,0,0,0.35));
       will-change: transform;
     }
 
@@ -440,14 +447,16 @@
 
     /* CONTATTI = pagina finale (bianca piena) */
     #contatti {
-      background: #ffffff;
-      border-top: 1px solid rgba(0,0,0,0.04);
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-start;               /* non più centrato */
-      padding-top: clamp(90px, 14vh, 170px); /* contenuto più giù */
-      padding-bottom: clamp(60px, 12vh, 140px);
+    background: #ffffff;
+    border-top: 1px solid rgba(0,0,0,0.04);
+
+    min-height: auto;          /* ← fondamentale */
+    display: block;
+
+    padding-top: 80px;
+    padding-bottom: 60px;      /* ← spazio elegante, non eccessivo */
     }
+
     #contatti .section-inner{
       width: 100%;
       max-width: 1120px;
@@ -725,8 +734,12 @@
       <nav class="main-nav" id="mainNav">
         <a href="#chi-sono">Chi sono</a>
         <a href="#assistenza">Come posso assisterti</a>
+        <a href="#metodo">Come lavoro</a>
+        <a href="#storia">La mia storia</a>
+
         <a href="#contatti">Contatti</a>
         <a href="#contatti" class="btn-nav">Scrivi su WhatsApp</a>
+        
       </nav>
     </div>
   </header>
@@ -740,29 +753,20 @@
         aria-label="Studio legale con scaffali e libri di diritto"></div>
 
 
-      <div class="hero-inner">
-        <div class="hero-kicker">Diritto civile e di famiglia · Barberino Tavarnelle</div>
+        <div class="hero-inner">
+        <div class="hero-kicker">Studio legale · Barberino Tavarnelle (FI)</div>
         <h1 class="hero-title">Avvocato Isabella Mugnaini</h1>
-        <div class="hero-subtitle">Assistenza legale per famiglie, persone e patrimoni</div>
-
-        <p class="hero-text">
-          Supporto a privati, famiglie e professionisti nelle controversie che riguardano la
-          vita quotidiana: rapporti familiari, casa, condominio, locazioni, successioni,
-          responsabilità e crediti.
-        </p>
-
-        <p class="hero-note">
-          Ogni incarico viene valutato insieme, con attenzione alla concretezza, ai tempi
-          e ai costi delle possibili soluzioni.
-        </p>
+        <div class="hero-subtitle">Diritto civile · Famiglia · Successioni</div>
 
         <div class="hero-cta">
-          <a href="#contatti" class="btn-primary">Richiedi un contatto</a>
-          <a href="https://wa.me/39XXXXXXXXXX" class="btn-ghost" target="_blank" rel="noopener">
+            <a href="#contatti" class="btn-primary">Richiedi un contatto</a>
+            <a href="https://wa.me/39XXXXXXXXXX" class="btn-ghost" target="_blank" rel="noopener">
             Scrivi su WhatsApp
-          </a>
+            </a>
         </div>
-      </div>
+        </div>
+
+
 
       <!-- FIRMA REALE NEL MEZZO SOPRA LA FOTO -->
       <div class="hero-signature-layer" aria-hidden="true">
@@ -775,31 +779,36 @@
 
   <!-- SLOGAN ELEGANTE -->
   <section id="slogan">
-    <div id="elegant-slogan"><span></span></div>
+    <div id="elegant-slogan"><span>"Chiarezza, competenza e tutela quando ne hai più bisogno."</span></div>
   </section>
 
-  <!-- CHI SONO (testo “scritto sullo sfondo”, senza pannello) -->
+  <!-- CHI SONO -->
   <section class="section" id="chi-sono">
     <div class="section-inner">
-      <h2 class="section-title">Avvocato civilista in Toscana</h2>
+      <h2 class="section-title">Chi sono</h2>
 
-      <div class="chi-sono-text">
-        <p class="chi-sono-lead">
-          Un’assistenza concreta, con attenzione alla persona e alla ricerca di soluzioni sostenibili.
-        </p>
+      <div class="profile-grid single">
+        <div class="profile-card">
+          <p style="margin:0 0 10px; font-weight:800; color: var(--green-dark);">
+            Avvocato civilista  Barberino Tavarnelle (FI)
+          </p>
 
-        <p class="chi-sono-body">
-          Ricevo su appuntamento in studio a Barberino Tavarnelle e, quando utile, anche online.
-          L’obiettivo è costruire insieme un percorso chiaro: analisi, strategia e tutela dei tuoi interessi.
-          Le immagini e i momenti del percorso li raccontiamo nella sezione <strong>Percorso</strong>.
-        </p>
+          <p style="margin:0;">
+            Svolgo la mia attività in ambito civile, con particolare attenzione al diritto di famiglia,
+            alle successioni, alle controversie in materia immobiliare e condominiale, nonchè alla Responsabilità civile e al recupero crediti.
+            <br><br>
+            Ricevo su appuntamento in studio e, quando utile, anche da remoto. Ogni incarico viene valutato con chiarezza su tempi,
+            costi e possibili strategie, privilegiando soluzioni concrete e sostenibili.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- COME POSSO ASSISTERTI (solo pannelli servizi, accostati) -->
+
+<!-- COME POSSO ASSISTERTI (solo pannelli servizi, accostati) -->
   <section class="section" id="assistenza" aria-label="Come posso assisterti">
-    <div class="section-inner">
+    <div class="section-inner"> 
       <h2 class="section-title">Come posso assisterti</h2>
       <p class="section-intro">
         Ecco le principali aree in cui posso supportarti. Ogni pratica viene valutata caso per caso, con chiarezza su tempi e costi.
@@ -837,6 +846,58 @@
     </div>
   </section>
 
+
+    <!-- COME LAVORO -->
+  <section class="section" id="metodo">
+    <div class="section-inner">
+      <h2 class="section-title">Come lavoro</h2>
+      <p class="section-intro">
+        Ogni pratica viene gestita con metodo: analisi del caso, valutazione delle opzioni e condivisione chiara
+        di tempi e costi prima di procedere.
+      </p>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-kicker">Fase 1</div>
+          <h3>Valutazione iniziale</h3>
+          <p>Raccolta dei fatti e analisi della documentazione per definire obiettivi e possibilit? concrete.</p>
+          <div class="service-note">Chiarezza prima di agire.</div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-kicker">Fase 2</div>
+          <h3>Strategia e preventivo</h3>
+          <p>Indicazione delle alternative (stragiudiziale/giudiziale), tempi prevedibili e costi.</p>
+          <div class="service-note">Trasparenza su tempi e spese.</div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-kicker">Fase 3</div>
+          <h3>Gestione della pratica</h3>
+          <p>Aggiornamenti, scadenze e attivit? coerenti con la strategia concordata.</p>
+          <div class="service-note">Organizzazione e affidabilit?.</div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-kicker">Fase 4</div>
+          <h3>Chiusura e prossimi passi</h3>
+          <p>Esito, documenti finali e indicazioni operative per tutelarsi nel tempo.</p>
+          <div class="service-note">Niente lasciato "in sospeso".</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+    <section class="section" id="storia">
+    <div class="section-inner">
+        <h2 class="section-title">La mia storia</h2>
+        <p class="section-intro">
+        Un percorso fatto di studio, pratica e crescita professionale. Qui trovi alcuni momenti significativi che raccontano
+        il mio cammino, in modo essenziale e concreto.
+        </p>
+    </div>
+    </section>
+
   <!-- PERCORSO (orizzontale full-screen) -->
   <section id="timeline" class="hscroll" aria-label="Percorso">
     <div class="hscroll__sticky">
@@ -844,29 +905,29 @@
 
         <article class="hpanel">
           <div class="hphoto" style="--x:22%; --y:34%; --w: clamp(190px, 22vw, 360px);">
-            <img src="img/iim2.jpg" alt="Laurea" loading="lazy">
+            <img src="img/foto1.jpeg" alt="Laurea" loading="lazy">
           </div>
           <div class="hphoto" style="--x:68%; --y:62%; --w: clamp(200px, 27vw, 390px);">
-            <img src="img/iim1.jpg" alt="Dettaglio laurea" loading="lazy">
+            <img src="img/foto2.jpeg" alt="Dettaglio laurea" loading="lazy">
           </div>
         </article>
 
         <article class="hpanel">
           <div class="hphoto" style="--x:38%; --y:54%; --w: clamp(300px, 38vw, 640px);">
-            <img src="img/iim2.jpg" alt="Praticantato" loading="lazy">
+            <img src="img/foto3.jpeg" alt="Praticantato" loading="lazy">
           </div>
         </article>
 
         <article class="hpanel">
           <div class="hphoto" style="--x:-10%; --y:62%; --w: clamp(220px, 30vw, 500px);">
-            <img src="img/iim1.jpg" alt="Studio" loading="lazy">
+            <img src="img/foto1.jpeg" alt="Studio" loading="lazy">
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- CONTATTI -->
+<!-- CONTATTI -->
   <section class="section" id="contatti">
     <div class="section-inner">
       <h2 class="section-title">Contatti</h2>
@@ -1177,8 +1238,6 @@
     const heroImg = document.querySelector('.hero-img');
 
     const slogan = document.getElementById('elegant-slogan');
-    const sloganSpan = slogan ? slogan.querySelector('span') : null;
-    const sloganText = '"Chiarezza, competenza e tutela quando ne hai più bisogno."';
 
     const mqNarrow = window.matchMedia('(max-width: 800px)');
 
@@ -1337,29 +1396,6 @@
     updateScrollConfig();
     mqNarrow.addEventListener('change', updateScrollConfig);
 
-    let typingTimer = null;
-    let typedLength = 0;
-    const typeDelay = 60;
-
-    function resetTyping() {
-      if (typingTimer) { clearInterval(typingTimer); typingTimer = null; }
-      typedLength = 0;
-      if (sloganSpan) sloganSpan.textContent = '';
-    }
-
-    function startTyping() {
-      if (!sloganSpan || typingTimer) return;
-      typingTimer = setInterval(() => {
-        if (typedLength < sloganText.length) {
-          sloganSpan.textContent += sloganText.charAt(typedLength);
-          typedLength += 1;
-        } else {
-          clearInterval(typingTimer);
-          typingTimer = null;
-        }
-      }, typeDelay);
-    }
-
     function handleHeroScroll() {
       if (!heroSection || !heroWrapper) return;
 
@@ -1444,10 +1480,8 @@
       if (slogan) {
         if (progress > scrollConfig.sloganAt) {
           slogan.classList.add('show');
-          if (!typingTimer && typedLength === 0) startTyping();
         } else {
           slogan.classList.remove('show');
-          resetTyping();
         }
       }
     }
