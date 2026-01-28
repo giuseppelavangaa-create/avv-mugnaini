@@ -261,26 +261,9 @@
     .section-intro { max-width: 680px; font-size: 15px; color: var(--muted); margin-bottom: 26px; }
 
     
-    /* CHI SONO – testo senza pannello (scritto sullo sfondo) */
-    #chi-sono .chi-sono-text{
-      max-width: 980px;
-    }
-    #chi-sono .chi-sono-lead{
-      margin-top: 18px;
-      font-weight: 800;
-      letter-spacing: .01em;
-      color: var(--green-dark);
-      font-size: clamp(16px, 1.35vw, 20px);
-      line-height: 1.5;
-    }
-    #chi-sono .chi-sono-body{
-      margin-top: 14px;
-      color: rgba(0,0,0,0.68);
-      font-size: clamp(14px, 1.05vw, 16px);
-      line-height: 1.75;
-      max-width: 820px;
-    }
-/* CHI SONO */
+
+
+      /* CHI SONO */
     .profile-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
@@ -384,7 +367,7 @@
 
     .hpanel{
       position: relative;
-      flex: 0 0 100vw;
+      flex: 0 0 50vw;
       height: 100%;
       padding: clamp(18px, 3vw, 44px);
       overflow: visible;
@@ -402,8 +385,7 @@
       z-index: 2;
     }
     
-/* TIMELINE: solo foto (niente pannelli bianchi) */
-    #timeline .hpanel__content{ display:none !important; }
+
 
 .hpanel__year{
       font-size: 11px;
@@ -529,43 +511,9 @@
     }
   
 
-    /* FOTO TIMELINE: sicurezza mobile (no overlap strano) */
 
-      @media (max-width: 820px){
-    /* ✅ mobile: timeline verticale, niente sticky/fullscreen */
-    #timeline{ height: auto !important; }
-    #timeline .hscroll__sticky{
-      position: relative;
-      top: auto;
-      height: auto;
-    }
-    #timeline .hscroll__track{
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      transform: none !important;
-      will-change: auto;
-    }
-    #timeline .hpanel{
-      flex: 0 0 auto;
-      height: auto;
-      min-height: auto;
-      padding: 22px 18px;
-    }
-  }
 
-    @media (max-width: 820px){
-      .hpanel{ flex-direction: column; justify-content: center; gap: 14px; }
-      .hpanel__content{ width: 100%; max-width: 520px; }
-      .hphoto{
-        position: relative;
-        top: auto; left: auto;
-        transform: none;
-        width: min(86vw, 440px);
-        margin: 10px auto 0;
-        box-shadow: 0 18px 46px rgba(0,0,0,0.20);
-      }
-    }
+
 
 
     /* === PRELOADER (logo + due lettere che brillano) === */
@@ -730,6 +678,78 @@
         width: min(300px, 80vw);
       }
     }
+
+    /* Default: desktop usa la timeline orizzontale */
+    #timeline-mobile { display: none; }
+
+    /* Mobile: timeline verticale dedicata, nasconde quella orizzontale */
+    @media (max-width: 820px){
+      #timeline { display: none; }
+      #timeline-mobile { display: block; }
+
+      .timeline-m{
+        display: grid;
+        gap: 16px;
+        padding-top: 10px;
+      }
+      .timeline-m__item{
+        margin: 0;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 18px 46px rgba(0,0,0,0.20);
+        background: rgba(0,0,0,0.06);
+      }
+      .timeline-m__item img{
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+      }
+    }
+
+      /* === DESKTOP TIMELINE (UNICA REGOLA) === */
+      @media (min-width: 821px){
+
+        /* Ogni pannello: 2 colonne logiche */
+        #timeline .hpanel{
+          display: grid;
+          grid-template-columns: 420px minmax(420px, 1fr); /* testo | stage */
+          gap: 34px;
+          align-items: center;
+          justify-content: center;
+          padding-inline: min(3vw, 36px);
+          justify-content: normal; /* annulla flex-start */
+        }
+
+        /* Testo: stabile e leggibile */
+        #timeline .hpanel__content{
+          max-width: 420px;
+          z-index: 3;
+        }
+
+        /* Stage: contenitore RELATIVO per le foto absolute */
+        #timeline .hpanel__stage{
+          position: relative;
+          width: min(760px, 55vw);
+          height: min(560px, 72vh);
+          justify-self: start;
+          overflow: visible;
+        }
+
+        /* Le foto ora sono absolute SOLO dentro lo stage */
+        #timeline .hpanel__stage .hphoto{
+          position: absolute;
+          z-index: 2;
+        }
+
+        /* Clamp dentro lo stage (non “sulla pagina”) */
+        #timeline .hpanel__stage .hphoto{
+          left: clamp(10%, var(--x, 50%), 90%);
+          top:  clamp(12%, var(--y, 50%), 88%);
+        }
+      }
+
+
 
 </style>
 </head>
@@ -922,34 +942,123 @@
     </div>
     </section>
 
-  <!-- PERCORSO (orizzontale full-screen) -->
-  <section id="timeline" class="hscroll" aria-label="Percorso">
-    <div class="hscroll__sticky">
-      <div class="hscroll__track">
+    <!-- PERCORSO (orizzontale full-screen) -->
+    <section id="timeline" class="hscroll" aria-label="Percorso">
+      <div class="hscroll__sticky">
+        <div class="hscroll__track">
 
         <article class="hpanel">
-          <div class="hphoto" style="--x:22%; --y:34%; --w: clamp(190px, 22vw, 360px);">
-            <img src="img/foto1.jpeg" alt="Laurea" loading="lazy">
+          <div class="hpanel__content">
+            <div class="hpanel__year">2016 · Laurea</div>
+            <h3>Un traguardo costruito con costanza</h3>
+            <p>Testo breve (2–4 righe) che racconta il momento in modo essenziale e concreto.</p>
           </div>
-          <div class="hphoto" style="--x:68%; --y:62%; --w: clamp(200px, 27vw, 390px);">
-            <img src="img/foto2.jpeg" alt="Dettaglio laurea" loading="lazy">
+
+          <div class="hpanel__stage" aria-hidden="true">
+            <div class="hphoto" style="--x:22%; --y:34%; --w: clamp(190px, 22vw, 360px);">
+              <img src="img/foto1.jpeg" alt="Laurea" loading="lazy">
+            </div>
+            <div class="hphoto" style="--x:68%; --y:62%; --w: clamp(200px, 27vw, 390px);">
+              <img src="img/foto2.jpeg" alt="Dettaglio laurea" loading="lazy">
+            </div>
           </div>
         </article>
 
         <article class="hpanel">
-          <div class="hphoto" style="--x:38%; --y:54%; --w: clamp(300px, 38vw, 640px);">
-            <img src="img/foto3.jpeg" alt="Praticantato" loading="lazy">
+          <div class="hpanel__content">
+            <div class="hpanel__year">2019 · Praticantato</div>
+            <h3>Metodo, studio, disciplina</h3>
+            <p>Testo breve: cosa hai consolidato e che valore ha oggi per il cliente.</p>
+          </div>
+
+          <div class="hpanel__stage" aria-hidden="true">
+            <div class="hphoto" style="--x:38%; --y:54%; --w: clamp(300px, 38vw, 640px);">
+              <img src="img/foto3.jpeg" alt="Praticantato" loading="lazy">
+            </div>
           </div>
         </article>
 
         <article class="hpanel">
-          <div class="hphoto" style="--x:-10%; --y:62%; --w: clamp(220px, 30vw, 500px);">
-            <img src="img/foto1.jpeg" alt="Studio" loading="lazy">
+          <div class="hpanel__content">
+            <div class="hpanel__year">Oggi · Studio</div>
+            <h3>Tutela concreta, comunicazione chiara</h3>
+            <p>Ultima card: chiudi con fiducia e rimanda ai contatti.</p>
+          </div>
+
+          <div class="hpanel__stage" aria-hidden="true">
+            <div class="hphoto" style="--x:-10%; --y:62%; --w: clamp(220px, 30vw, 500px);">
+              <img src="img/foto1.jpeg" alt="Studio" loading="lazy">
+            </div>
           </div>
         </article>
+
+
+        </div>
       </div>
+    </section>
+
+
+<!-- TIMELINE MOBILE (verticale, foto + testo) -->
+<section id="timeline-mobile" class="section" aria-label="Percorso (mobile)">
+  <div class="section-inner">
+    <div class="timeline-m">
+
+      <article class="timeline-m__card">
+        <div class="timeline-m__media">
+          <img src="img/foto1.jpeg" alt="Laurea" loading="lazy">
+        </div>
+        <div class="timeline-m__body">
+          <div class="timeline-m__meta">2016 · Laurea</div>
+          <h3 class="timeline-m__title">Un traguardo costruito con costanza</h3>
+          <p class="timeline-m__text">
+            Qui inserirai un testo breve (2–4 righe) che racconta quel momento in modo essenziale e concreto.
+          </p>
+        </div>
+      </article>
+
+      <article class="timeline-m__card">
+        <div class="timeline-m__media">
+          <img src="img/foto2.jpeg" alt="Dettaglio laurea" loading="lazy">
+        </div>
+        <div class="timeline-m__body">
+          <div class="timeline-m__meta">2017 · Primi passi</div>
+          <h3 class="timeline-m__title">Approccio pratico e attenzione ai dettagli</h3>
+          <p class="timeline-m__text">
+            Testo descrittivo breve: cosa è successo, cosa hai imparato, che valore ha oggi per il cliente.
+          </p>
+        </div>
+      </article>
+
+      <article class="timeline-m__card">
+        <div class="timeline-m__media">
+          <img src="img/foto3.jpeg" alt="Praticantato" loading="lazy">
+        </div>
+        <div class="timeline-m__body">
+          <div class="timeline-m__meta">2019 · Praticantato</div>
+          <h3 class="timeline-m__title">Metodo, studio, disciplina</h3>
+          <p class="timeline-m__text">
+            Qui descrivi il “come lavori”: confronto, chiarezza, tempi e costi condivisi, obiettivi realistici.
+          </p>
+        </div>
+      </article>
+
+      <article class="timeline-m__card">
+        <div class="timeline-m__media">
+          <img src="img/foto1.jpeg" alt="Studio" loading="lazy">
+        </div>
+        <div class="timeline-m__body">
+          <div class="timeline-m__meta">Oggi · Studio</div>
+          <h3 class="timeline-m__title">Tutela concreta, comunicazione chiara</h3>
+          <p class="timeline-m__text">
+            Ultima card: rafforza fiducia e posizionamento (senza “fuffa”), e invita al contatto.
+          </p>
+        </div>
+      </article>
+
     </div>
-  </section>
+  </div>
+</section>
+
 
 <!-- CONTATTI -->
   <section class="section" id="contatti">
@@ -975,281 +1084,7 @@
   </footer>
 
   <!-- SCRIPT -->
-  <script>
-  (() => {
-    const canvas = document.getElementById("bg-animated");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d", { alpha: false });
-    ctx.imageSmoothingEnabled = true;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const BG_GREEN = "#C7F0A8";
-    const BG_WHITE = "#FFFFFF";
-
-    // Colori linee: verde (default) -> bianco (durante orizzontale)
-    const LINE_A_G = [255,255,255,0.26];
-    const LINE_B_G = [255,255,255,0.14];
-    const ACCENT_G = [185,255, 80,0.10];
-
-    // su sfondo bianco uso linee più scure/verdine (stesso effetto, più leggibile)
-    const LINE_A_W = [18, 51, 34,0.22];
-    const LINE_B_W = [18, 51, 34,0.12];
-    const ACCENT_W = [74,123, 92,0.14];
-
-    let bgMix = 0; // 0 = verde, 1 = bianco
-
-    const _hexToRgb = (hex) => {
-      const h = hex.replace('#','').trim();
-      const n = parseInt(h.length===3 ? h.split('').map(c=>c+c).join('') : h, 16);
-      return [(n>>16)&255, (n>>8)&255, n&255];
-    };
-    const _mixArr = (a,b,t) => a.map((v,i)=> v + (b[i]-v)*t);
-    const _mixHex = (h1,h2,t) => {
-      const a=_hexToRgb(h1), b=_hexToRgb(h2);
-      const m=_mixArr(a,b,t).map(x=>Math.round(x));
-      return `rgb(${m[0]},${m[1]},${m[2]})`;
-    };
-    const _rgba = (v) => `rgba(${v[0]},${v[1]},${v[2]},${v[3]})`;
-
-    // Render a risoluzione ridotta (molto più fluido)
-    const low = document.createElement("canvas");
-    const lctx = low.getContext("2d", { alpha: false });
-    lctx.imageSmoothingEnabled = true;
-
-    let w=0,h=0,dpr=1, lw=0, lh=0, scale=0.75;
-    let t = 0;
-
-    // scroll “liquido” (inertia)
-    let sy = 0, sySmooth = 0, prevSySmooth = 0;
-    let flowX = 0, flowY = 0;
-
-    // griglia per marching squares
-    let step = 22;      // in px del low-canvas
-    let cols = 0, rows = 0;
-    let values = null;
-
-    const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
-    const lerp = (a,b,k) => a + (b-a)*k;
-
-    function resize(){
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = Math.floor(innerWidth * dpr);
-      h = Math.floor(innerHeight * dpr);
-      canvas.width = w;
-      canvas.height = h;
-
-      // scala render (meno su mobile)
-      scale = innerWidth < 700 ? 0.60 : 0.75;
-
-      lw = Math.max(2, Math.floor(w * scale));
-      lh = Math.max(2, Math.floor(h * scale));
-      low.width = lw;
-      low.height = lh;
-
-      // step dinamico (più grande = più leggero)
-      step = innerWidth < 700 ? Math.floor(30 * scale * dpr) : Math.floor(24 * scale * dpr);
-      step = Math.max(14, step);
-
-      cols = Math.floor(lw / step) + 1;
-      rows = Math.floor(lh / step) + 1;
-      values = new Float32Array(cols * rows);
-
-      ctx.imageSmoothingEnabled = true;
-    }
-
-    // Onde liquide: grandi onde + leggero “warp” (acqua/gel), niente effetto bolle
-    function field(x, y, time){
-      // Frequenza più bassa = onde più larghe e pulite
-      const nx = x * 0.005;
-      const ny = y * 0.005;
-
-      // tempo
-      const t = time;
-
-      // “warp” morbido (fa sembrare liquido, non geometrico)
-      const warp =
-        Math.sin((nx + ny) * 0.55 + t * 0.35) * 0.45 +
-        Math.sin((nx - ny) * 0.60 - t * 0.28) * 0.35;
-
-      const X = nx + warp + flowX;
-      const Y = ny + warp * 0.9 + flowY;
-
-      // Due onde principali, direzioni diverse (effetto ondeggiante vero)
-      const w1 = Math.sin(Y * 1.15 + t * 0.85);
-      const w2 = Math.sin(X * 0.95 - t * 0.55);
-
-      // Increspatura leggerissima (non “rumore”)
-      const rip = Math.sin((X + Y) * 0.70 + t * 0.40) * 0.35;
-
-      // Range compatibile con le tue soglie
-      return (w1 * 0.60 + w2 * 0.40 + rip * 0.25) * 0.45;
-    }
-
-
-    function computeField(time){
-      let k = 0;
-      for (let j=0; j<rows; j++){
-        const y = j * step;
-        for (let i=0; i<cols; i++){
-          const x = i * step;
-          values[k++] = field(x, y, time);
-        }
-      }
-    }
-
-    // marching squares con INTERPOLAZIONE (linee molto più morbide, niente “scalini”)
-    function drawIsolines(threshold){
-      const EPS = 1e-6;
-
-      // t in [0..1] dove la soglia “taglia” tra v1 e v2
-      const interp = (v1, v2) => {
-        const dv = v2 - v1;
-        if (Math.abs(dv) < EPS) return 0.5;
-        return (threshold - v1) / dv;
-      };
-
-      for (let j=0; j<rows-1; j++){
-        const y = j * step;
-        const rowOff  = j * cols;
-        const rowOffN = (j+1) * cols;
-
-        for (let i=0; i<cols-1; i++){
-          const x = i * step;
-
-          const vTL = values[rowOff  + i];
-          const vTR = values[rowOff  + i + 1];
-          const vBR = values[rowOffN + i + 1];
-          const vBL = values[rowOffN + i];
-
-          const a = vTL > threshold ? 1 : 0; // TL
-          const b = vTR > threshold ? 1 : 0; // TR
-          const c = vBR > threshold ? 1 : 0; // BR
-          const d = vBL > threshold ? 1 : 0; // BL
-          const state = (a<<3) | (b<<2) | (c<<1) | d;
-
-          if (state === 0 || state === 15) continue;
-
-          // punti interpolati sui 4 lati
-          const tTop    = interp(vTL, vTR);
-          const tRight  = interp(vTR, vBR);
-          const tBottom = interp(vBL, vBR);
-          const tLeft   = interp(vTL, vBL);
-
-          const pTop    = { x: x + step * tTop,    y: y };
-          const pRight  = { x: x + step,          y: y + step * tRight };
-          const pBottom = { x: x + step * tBottom,y: y + step };
-          const pLeft   = { x: x,                 y: y + step * tLeft };
-
-          lctx.beginPath();
-
-          // casi standard
-          switch(state){
-            case 1:  case 14: lctx.moveTo(pLeft.x, pLeft.y);     lctx.lineTo(pBottom.x, pBottom.y); break;
-            case 2:  case 13: lctx.moveTo(pBottom.x, pBottom.y); lctx.lineTo(pRight.x, pRight.y);   break;
-            case 3:  case 12: lctx.moveTo(pLeft.x, pLeft.y);     lctx.lineTo(pRight.x, pRight.y);   break;
-            case 4:  case 11: lctx.moveTo(pTop.x, pTop.y);       lctx.lineTo(pRight.x, pRight.y);   break;
-            case 6:  case 9:  lctx.moveTo(pTop.x, pTop.y);       lctx.lineTo(pBottom.x, pBottom.y); break;
-            case 7:  case 8:  lctx.moveTo(pTop.x, pTop.y);       lctx.lineTo(pLeft.x, pLeft.y);     break;
-
-            // ambigui: 5 e 10 → “asymptotic decider” (risultato più naturale)
-            case 5: {
-              const center = (vTL + vTR + vBR + vBL) * 0.25;
-              if (center > threshold){
-                lctx.moveTo(pTop.x, pTop.y);     lctx.lineTo(pRight.x, pRight.y);
-                lctx.moveTo(pLeft.x, pLeft.y);   lctx.lineTo(pBottom.x, pBottom.y);
-              } else {
-                lctx.moveTo(pTop.x, pTop.y);     lctx.lineTo(pLeft.x, pLeft.y);
-                lctx.moveTo(pRight.x, pRight.y); lctx.lineTo(pBottom.x, pBottom.y);
-              }
-              break;
-            }
-            case 10: {
-              const center = (vTL + vTR + vBR + vBL) * 0.25;
-              if (center > threshold){
-                lctx.moveTo(pTop.x, pTop.y);     lctx.lineTo(pLeft.x, pLeft.y);
-                lctx.moveTo(pRight.x, pRight.y); lctx.lineTo(pBottom.x, pBottom.y);
-              } else {
-                lctx.moveTo(pTop.x, pTop.y);     lctx.lineTo(pRight.x, pRight.y);
-                lctx.moveTo(pLeft.x, pLeft.y);   lctx.lineTo(pBottom.x, pBottom.y);
-              }
-              break;
-            }
-          }
-
-          lctx.stroke();
-        }
-      }
-    }
-
-
-    function render(now){
-      // dt in secondi
-      const dt = Math.min(0.05, (now - (render._last || now)) / 1000);
-      render._last = now;
-
-      sy = window.scrollY || 0;
-      sySmooth = lerp(sySmooth, sy, 0.12);
-      const dsy = (sySmooth - prevSySmooth);
-      prevSySmooth = sySmooth;
-
-      // Modalità sfondo: verde (default) -> bianco durante lo scorrimento orizzontale
-      const _targetBg = document.documentElement.classList.contains('hscroll-white') ? 1 : 0;
-      bgMix = lerp(bgMix, _targetBg, 0.08);
-
-      const bgFill = _mixHex(BG_GREEN, BG_WHITE, bgMix);
-      const lineA  = _rgba(_mixArr(LINE_A_G, LINE_A_W, bgMix));
-      const lineB  = _rgba(_mixArr(LINE_B_G, LINE_B_W, bgMix));
-      const accent = _rgba(_mixArr(ACCENT_G, ACCENT_W, bgMix));
-
-      // lo scroll “spinge” il campo (sensazione liquida)
-      const push = clamp(dsy * 0.0006, -0.08, 0.08);
-      flowX = lerp(flowX, flowX + push * 0.25, 0.08);
-      flowY = lerp(flowY, flowY + push * 0.55, 0.08);
-
-      if (!reduced) t += dt * 0.9; // velocità base
-
-      // clear + bg
-      lctx.fillStyle = bgFill;
-      lctx.fillRect(0,0,lw,lh);
-
-      // calcola campo 1 volta sola / frame
-      computeField(t);
-
-      // Stile linee: su bianco evitiamo l'effetto “puntinato” usando cap non arrotondato
-      lctx.lineCap = (bgMix > 0.45) ? "butt" : "round";
-      lctx.lineJoin = "round";
-
-      const levels = [-0.32, -0.12, 0.08, 0.28, 0.48];
-
-      // pass soft (più spesso)
-      lctx.lineWidth = 1.8;
-      lctx.strokeStyle = lineB;
-      for (let k=0; k<levels.length; k++) drawIsolines(levels[k]);
-
-      // pass principale (molto più marcato)
-      lctx.lineWidth = 2.8;
-      lctx.strokeStyle = lineA;
-      drawIsolines(-0.30);
-      drawIsolines(0.06);
-
-      // accento verdino (un filo più presente)
-      lctx.lineWidth = 1.6;
-      lctx.strokeStyle = accent;
-      drawIsolines(0.42);
-
-
-      // copia sul canvas principale (upscale)
-      ctx.drawImage(low, 0, 0, w, h);
-
-      requestAnimationFrame(render);
-    }
-
-    addEventListener("resize", resize);
-    resize();
-    requestAnimationFrame(render);
-  })();
-</script>
 
   <script>
     function toggleNav() {
@@ -1265,8 +1100,7 @@
 
     const mqNarrow = window.matchMedia('(max-width: 800px)');
 
-    /* MARQUEE dietro la foto */
-    const marqueeEl = document.querySelector('.hero-marquee');
+
 
     /* FIRMA CENTRALE NELLA HERO */
     const signatureLayer = document.querySelector('.hero-signature-layer');
@@ -1564,8 +1398,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Taglia la “coda” vuota finale (così Contatti arriva subito dopo l’ultima foto)
         // Aumenta/diminuisci (0.30–0.60) per regolare quanto “anticipare” la fine.
-        const tailCut = Math.round(window.innerWidth * (window.innerWidth < 820 ? 0.28 : 0.42));
+        const tailCut = Math.round(window.innerWidth * (window.innerWidth < 820 ? 0.00 : 0.10));
         maxX = Math.max(0, maxX - tailCut);
+
         const extraPad = Math.round(window.innerHeight * 0.00);
         // ritardo piccolo: la prima foto non “è già lì” e il movimento orizzontale parte dopo un attimo
         const delay = 0; // start subito: nessuna pagina vuota prima delle foto
