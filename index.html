@@ -749,6 +749,44 @@
         }
       }
 
+      @media (max-width: 820px){
+        /* su mobile: non scurire la hero quando appare la firma */
+        .hero.show-signature .hero-img{
+          filter: none !important;
+        }
+      }
+
+      @media (max-width: 820px){
+      /* evita che la firma venga "clippata" dalla hero */
+      .hero{
+        overflow: visible;
+      }
+
+      /* firma sempre dentro e mai tagliata */
+      .hero-signature-layer{
+        left: 50%;
+        bottom: 18px !important;
+        width: 100%;
+        padding: 0 12px;
+      }
+
+      .hero-signature-wrapper{
+        width: min(320px, 92vw) !important;
+        max-width: 92vw;
+        overflow: visible !important;
+      }
+
+      /* l’object non deve forzare height:100% (può tagliare) */
+      .hero-signature-embed{
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100%;
+        display: block;
+        object-fit: contain;
+      }
+    }
+
+
 
 
 </style>
@@ -1270,7 +1308,14 @@
       if (heroImg) heroImg.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
 
       const sigMult = 1; // la firma NON deve scalare come la hero
-      if (signatureWrapper) signatureWrapper.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale * sigMult})`;
+      if (signatureWrapper) {
+        if (mqNarrow.matches) {
+          // mobile: non farla "scendere/scalare" insieme alla foto (causa tagli)
+          signatureWrapper.style.transform = 'none';
+        } else {
+          signatureWrapper.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale * sigMult})`;
+        }
+      }
 
 
       heroSection.classList.toggle('shrink', progress > scrollConfig.shrinkAt);
