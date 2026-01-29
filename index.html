@@ -173,17 +173,17 @@
     }
     #elegant-slogan{
       max-width: 880px;
-      margin: 0 auto 18px;
-      padding: 6px 18px 0;
+      margin: -28px auto 18px;   /* ← QUESTO LO ALZA */
+      padding: 0;
+
       font-family: "Playfair Display", serif;
       font-size: clamp(22px, 2.6vw, 36px);
       line-height: 1.3;
       letter-spacing: 0.02em;
       color: var(--green-dark);
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.35s ease-out, transform 0.35s ease-out;
     }
+
+
     #elegant-slogan span{ font-style: italic; }
     #elegant-slogan.show{
       opacity: 1;
@@ -251,9 +251,32 @@
     .hero.show-signature .hero-img { filter: brightness(0.72) contrast(1.05) saturate(1.02); }
     /* SEZIONI */
     .section { padding: 80px 20px; }
+    /* Alternanza sezioni: ritmo visivo */
+    .section.alt {
+      background: #ffffff;
+      border-top: 1px solid rgba(0,0,0,0.04);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    /* Divisore elegante tra sezioni (molto “studio”) */
+    .section-divider {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .section-divider::after{
+      content:"";
+      display:block;
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.10), transparent);
+    }
 
     /* Riduce lo spazio tra Servizi e inizio Percorso */
-    #assistenza.section{ padding-bottom: 6px; }
+    /* Spazio sopra e sotto per #assistenza */
+    #assistenza.section{
+      padding-top: 96px;
+      padding-bottom: 96px;
+    }
 
     .section-inner { max-width: 1120px; margin: 0 auto; }
     .section-kicker { font-size: 13px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); margin-bottom: 8px; font-weight: 700; }
@@ -264,101 +287,147 @@
 
 
       /* CHI SONO */
-    .profile-grid {
+      /* === CHI SONO: layout a 2 colonne === */
+      .chi-sono-grid{
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+
+      /* immagine semplice, niente card */
+      .chi-sono-image img{
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* === REVEAL PULITO (stile studio) === */
+      .reveal-left,
+      .reveal-right{
+        opacity: 0;
+        transition: opacity .5s ease, transform .5s ease;
+        will-change: opacity, transform;
+      }
+
+      .reveal-left{
+        transform: translateX(-40px);
+      }
+
+      .reveal-right{
+        transform: translateX(40px);
+      }
+
+      /* stato visibile */
+      .is-visible{
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* mobile: impila */
+      @media (max-width: 820px){
+        .chi-sono-grid{
+          grid-template-columns: 1fr;
+        }
+      }
+
+    /* --- SERVIZI (rettangoli piatti + "leggi altro") --- */
+    /* --- SOLO #assistenza: rettangoli piatti + "leggi altro" --- */
+    #assistenza .services-grid{
       display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: center;
-    }
-    .profile-grid.single{ grid-template-columns: 1fr; }
-
-    .profile-main-intro { font-size: 15px; margin-bottom: 14px; color: rgba(255,255,255,0.92); }
-    .profile-card {
-      background: rgba(255,255,255,0.94);
-      border-radius: 22px;
-      padding: 20px 18px;
-      box-shadow: 0 14px 34px rgba(0,0,0,0.14);
-      border: 1px solid rgba(0,0,0,0.05);
-    }
-    .profile-card p { font-size: 14px; color: var(--muted); }
-
-    /* BOTTONI */
-    .btn-primary {
-      background: var(--green);
-      color: var(--white);
-      padding: 12px 22px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
-      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, filter 0.15s ease-out;
-    }
-    .btn-primary:hover { filter: brightness(1.04); transform: translateY(-1px); box-shadow: 0 12px 26px rgba(0,0,0,0.22); }
-    .btn-ghost {
-      padding: 11px 22px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.8);
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      backdrop-filter: blur(6px);
-    }
-    .btn-ghost:hover { background: rgba(0,0,0,0.1); }
-
-    /* --- SERVIZI (pannelli bianchi accostati) --- */
-    .services-grid{
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
       align-items: stretch;
     }
-    .service-card{
-      background: #f6fbf6;
-      border-radius: 22px;
-      padding: 22px 20px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.10);
-      border: 1px solid rgba(0,0,0,0.04);
-      min-height: 240px;
+
+    #assistenza .service-card{
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 0;
+      padding: 18px 18px;
+      box-shadow: none;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
-    .service-kicker{
+
+    #assistenza .service-kicker{
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.18em;
       color: var(--muted);
       font-weight: 700;
     }
-    .service-card h3{
+
+    #assistenza .service-card h3{
       margin: 0;
       font-family: "Playfair Display", serif;
-      font-size: 24px;
+      font-size: 22px;
       color: var(--green-dark);
       line-height: 1.15;
     }
-    .service-card p{
+
+    #assistenza .service-card p{
       margin: 0;
       color: var(--muted);
       font-size: 14px;
       line-height: 1.65;
-      flex: 1;
     }
-    .service-note{
+
+    /* testo corto/esteso */
+    #assistenza .service-desc .more{ display: none; }
+    #assistenza .service-card.is-open .service-desc .more{ display: inline; }
+    #assistenza .service-card.is-open .service-desc .dots{ display: none; }
+
+    /* footer blocco */
+    #assistenza .service-footer{
+      margin-top: auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    #assistenza .service-note{
       font-size: 13px;
       color: var(--green-dark);
       font-weight: 800;
     }
+
+    #assistenza .btn-more{
+      border: 1px solid rgba(0,0,0,0.18);
+      background: transparent;
+      color: var(--green-dark);
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    #assistenza .btn-more:hover{
+      background: rgba(74,123,91,0.08);
+    }
+
+
+    @media (max-width: 1100px){
+      #assistenza .services-grid{ grid-template-columns: 1fr; }
+    }
+
+    
+
+    /* --- SOLO #metodo: stile piatto elenco --- */
+    #metodo .services-grid{ gap: 0; }
+    #metodo .service-card{
+      background: transparent;
+      padding: 18px 0;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      display: block;
+    }
+    #metodo .service-card{ border-top: 1px solid rgba(0,0,0,0.10); }
+    #metodo .services-grid .service-card:first-child{ border-top: none; }
 
     /* --- HORIZONTAL SCROLL (timeline full-screen) --- */
     .hscroll { position: relative; background: transparent; }
@@ -427,24 +496,91 @@
         transition: opacity .35s ease, transform .35s ease;
       }
 
-    /* CONTATTI = pagina finale (bianca piena) */
-    #contatti {
-    background: #ffffff;
-    border-top: 1px solid rgba(0,0,0,0.04);
-
-    min-height: auto;          /* ← fondamentale */
-    display: block;
-
-    padding-top: 80px;
-    padding-bottom: 60px;      /* ← spazio elegante, non eccessivo */
+    /* CONTATTI centrati */
+    #contatti{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px;
     }
 
-    #contatti .section-inner{
+    .contatti-inner{
+      max-width: 720px;
       width: 100%;
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 20px;
+      text-align: center;
     }
+
+    /* logo */
+    .contatti-logo{
+      display: flex;
+      justify-content: center;   /* CENTRATO ORIZZONTALMENTE */
+      margin-bottom: 22px;
+    }
+
+    .contatti-logo img{
+      height: 72px;              /* PIÙ GRANDE */
+      width: auto;
+      display: block;
+      opacity: 0.95;
+    }
+
+
+    /* titolo */
+    .contatti-title{
+      font-family: "Playfair Display", serif;
+      font-size: 30px;
+      color: var(--green-dark);
+      margin: 0 0 22px;
+    }
+
+    /* info */
+    .contatti-info{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+      font-size: 14px;
+    }
+
+    .contatti-info strong{
+      display: block;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+
+    .contatti-info a{
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* CTA */
+    .contatti-cta{
+      display: inline-block;
+      padding: 12px 22px;
+      border: 1px solid rgba(0,0,0,0.18);
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      margin-bottom: 26px;
+    }
+
+    /* testo finale */
+    .contatti-note{
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* mobile */
+    @media (max-width: 820px){
+      .contatti-info{
+        grid-template-columns: 1fr;
+      }
+    }
+
 
 
     /* FOOTER */
@@ -865,27 +1001,36 @@
   </section>
 
   <!-- CHI SONO -->
-  <section class="section" id="chi-sono">
-    <div class="section-inner">
-      <h2 class="section-title">Chi sono</h2>
+  <section class="section alt" id="chi-sono">
+    <div class="section-inner chi-sono-grid">
 
-      <div class="profile-grid single">
-        <div class="profile-card">
-          <p style="margin:0 0 10px; font-weight:800; color: var(--green-dark);">
-            Avvocato civilista  Barberino Tavarnelle (FI)
-          </p>
+      <!-- TESTO -->
+      <div class="chi-sono-text reveal-left">
+        <h2 class="section-title">Chi sono</h2>
 
-          <p style="margin:0;">
-            Svolgo la mia attività in ambito civile, con particolare attenzione al diritto di famiglia,
-            alle successioni, alle controversie in materia immobiliare e condominiale, nonchè alla Responsabilità civile e al recupero crediti.
-            <br><br>
-            Ricevo su appuntamento in studio e, quando utile, anche da remoto. Ogni incarico viene valutato con chiarezza su tempi,
-            costi e possibili strategie, privilegiando soluzioni concrete e sostenibili.
-          </p>
-        </div>
+        <p style="margin:0 0 10px; font-weight:800; color: var(--green-dark);">
+          Avvocato civilista Barberino Tavarnelle (FI)
+        </p>
+
+        <p>
+          Svolgo la mia attività in ambito civile, con particolare attenzione al diritto di famiglia,
+          alle successioni e alle controversie immobiliari.
+        </p>
+
+        <p style="margin-top:12px;">
+          Ogni incarico viene valutato con chiarezza su tempi, costi e possibili strategie,
+          privilegiando soluzioni concrete.
+        </p>
       </div>
+
+      <!-- IMMAGINE CLIENTE -->
+      <div class="chi-sono-image reveal-right">
+        <img src="img/foto1.jpeg" alt="Cliente assistito in studio">
+      </div>
+
     </div>
   </section>
+
 
 
 <!-- COME POSSO ASSISTERTI (solo pannelli servizi, accostati) -->
@@ -897,40 +1042,93 @@
       </p>
 
       <div class="services-grid">
-        <article class="service-card">
-          <div class="service-kicker">Area</div>
-          <h3>Diritto di famiglia</h3>
-          <p>Separazioni e divorzi, affidamento e rapporti con i figli, accordi tra coniugi e conviventi, amministrazione di sostegno, tutele e curatele.</p>
+      <article class="service-card">
+        <div class="service-kicker">Area</div>
+        <h3>Diritto di famiglia</h3>
+
+        <p class="service-desc">
+          Separazioni e divorzi, affidamento e rapporti con i figli, accordi tra coniugi e conviventi
+          <span class="dots">…</span>
+          <span class="more">
+            , amministrazione di sostegno, tutele e curatele. Ogni situazione viene valutata con attenzione e chiarezza.
+          </span>
+        </p>
+
+        <div class="service-footer">
           <div class="service-note">Centralità della persona e dei minori.</div>
-        </article>
+          <button class="btn-more" type="button" aria-expanded="false">
+            Leggi altro
+          </button>
+        </div>
+      </article>
 
-        <article class="service-card">
-          <div class="service-kicker">Area</div>
-          <h3>Casa, condominio e locazioni</h3>
-          <p>Controversie condominiali, danni all’immobile, rapporti di vicinato, affitti e sfratti (morosità o finita locazione), locazioni turistiche.</p>
+
+      <article class="service-card">
+        <div class="service-kicker">Area</div>
+        <h3>Casa, condominio e locazioni</h3>
+
+        <p class="service-desc">
+          Controversie condominiali, rapporti di vicinato, danni all’immobile, affitti e sfratti
+          <span class="dots">…</span>
+          <span class="more">
+            , morosità e fine locazione, locazioni turistiche. Valuto il caso e le possibili soluzioni,
+            privilegiando interventi concreti ed efficaci.
+          </span>
+        </p>
+
+        <div class="service-footer">
           <div class="service-note">Un supporto stabile per la tua casa.</div>
-        </article>
+          <button class="btn-more" type="button" aria-expanded="false">Leggi altro</button>
+        </div>
+      </article>
 
-        <article class="service-card">
-          <div class="service-kicker">Area</div>
-          <h3>Successioni e diritti reali</h3>
-          <p>Divisioni ereditarie e impugnazioni di testamenti, usucapione, servitù e confini tra fondi, tutela dei beni e passaggi generazionali.</p>
+
+      <article class="service-card">
+        <div class="service-kicker">Area</div>
+        <h3>Successioni e diritti reali</h3>
+
+        <p class="service-desc">
+          Divisioni ereditarie, successioni legittime e testamentarie, impugnazioni di testamenti
+          <span class="dots">…</span>
+          <span class="more">
+            , usucapione, servitù e confini tra fondi. L’obiettivo è tutelare il patrimonio e
+            accompagnare le decisioni con chiarezza.
+          </span>
+        </p>
+
+        <div class="service-footer">
           <div class="service-note">Tutela del patrimonio e continuità familiare.</div>
-        </article>
+          <button class="btn-more" type="button" aria-expanded="false">Leggi altro</button>
+        </div>
+      </article>
 
-        <article class="service-card">
-          <div class="service-kicker">Area</div>
-          <h3>Responsabilità civile e crediti</h3>
-          <p>Sinistri stradali, responsabilità medica e professionale, rapporti con assicurazioni, recupero crediti e valutazione di rischi/benefici della causa.</p>
+
+      <article class="service-card">
+        <div class="service-kicker">Area</div>
+        <h3>Responsabilità civile e recupero crediti</h3>
+
+        <p class="service-desc">
+          Sinistri stradali, responsabilità medica e professionale, rapporti con assicurazioni
+          <span class="dots">…</span>
+          <span class="more">
+            , recupero crediti e valutazione dei rischi e benefici dell’azione legale.
+            Ogni scelta viene condivisa prima di procedere.
+          </span>
+        </p>
+
+        <div class="service-footer">
           <div class="service-note">Scelte chiare, tempi e costi valutati insieme.</div>
-        </article>
+          <button class="btn-more" type="button" aria-expanded="false">Leggi altro</button>
+        </div>
+      </article>
+
       </div>
     </div>
   </section>
 
 
     <!-- COME LAVORO -->
-  <section class="section" id="metodo">
+  <section class="section alt" id="metodo">
     <div class="section-inner">
       <h2 class="section-title">Come lavoro</h2>
       <p class="section-intro">
@@ -1099,19 +1297,48 @@
 
 
 <!-- CONTATTI -->
-  <section class="section" id="contatti">
-    <div class="section-inner">
-      <h2 class="section-title">Contatti</h2>
-      <p><strong>Studio legale Avv. Isabella Mugnaini</strong></p>
-      <p>Piazza Mazzini 2 – 50028 Barberino Tavarnelle (FI)</p>
-      <p>Email: <a href="mailto:info@studio-mugnaini.it">info@studio-mugnaini.it</a></p>
-      <p>Telefono: <a href="tel:+390558079127">+39 055 8079127</a></p>
-      <p>WhatsApp: <a href="https://wa.me/39XXXXXXXXXX" target="_blank" rel="noopener">scrivi al numero dedicato</a></p>
-      <p style="margin-top:10px;font-size:13px;color:var(--muted);">
-        Ricevo su appuntamento. È possibile concordare anche colloqui online.
+<section class="section alt" id="contatti">
+  <div class="section-inner contatti-inner">
+
+    <!-- LOGO -->
+    <div class="contatti-logo">
+      <img src="img/logo.jpeg" alt="Studio legale">
+    </div>
+
+    <!-- TITOLO -->
+    <h2 class="contatti-title">Contatti</h2>
+
+    <!-- INFO CONTATTI -->
+    <div class="contatti-info">
+      <p>
+        <strong>Studio</strong><br>
+        Barberino Tavarnelle (FI)
+      </p>
+      <p>
+        <strong>Email</strong><br>
+        <a href="mailto:info@studio.it">info@studio.it</a>
+      </p>
+      <p>
+        <strong>Telefono</strong><br>
+        <a href="tel:+39000000000">+39 000 000 000</a>
       </p>
     </div>
-  </section>
+
+    <!-- CTA -->
+    <a href="https://wa.me/39XXXXXXXXX" class="contatti-cta">
+      Scrivi su WhatsApp
+    </a>
+
+    <!-- TESTO FINALE (SOTTO A TUTTO) -->
+    <p class="contatti-note">
+      Ricevo su appuntamento.<br>
+      È possibile concordare anche un colloquio da remoto.
+    </p>
+
+  </div>
+</section>
+
+
 
   <!-- FOOTER -->
   <footer class="site-footer">
@@ -1124,220 +1351,245 @@
   <!-- SCRIPT -->
 
 
-  <script>
-    function toggleNav() {
-      const nav = document.getElementById('mainNav');
-      nav.classList.toggle('open');
+<script>
+  function toggleNav() {
+    const nav = document.getElementById('mainNav');
+    nav.classList.toggle('open');
+  }
+
+  const heroSection  = document.querySelector('.hero');
+  const heroWrapper  = document.querySelector('.hero-wrapper');
+  const heroImg      = document.querySelector('.hero-img');
+
+  const slogan = document.getElementById('elegant-slogan');
+
+  const mqNarrow = window.matchMedia('(max-width: 800px)');
+
+  /* MARQUEE dietro/sopra foto (se presente) */
+  const marqueeEl = document.querySelector('.hero-marquee');
+
+  /* FIRMA CENTRALE NELLA HERO */
+  const signatureLayer   = document.querySelector('.hero-signature-layer');
+  const signatureEmbed   = document.getElementById('firma-isa-hero');
+  const signatureWrapper = document.querySelector('.hero-signature-wrapper');
+
+  let signaturePen = null;
+  let signatureMaskPaths = [];
+  let signatureLengths = [];
+  let signatureTotalLength = 0;
+  let signatureReady = false;
+
+  /* OPT: performance firma */
+  let sigWasVisible = false;
+  let sigLastStep = -1;
+
+  /* Cache misure hero */
+  let _heroWrapperTop = 0;
+  let _heroWrapperHeight = 0;
+
+  function updateHeroMetrics(){
+    if (!heroWrapper) return;
+    _heroWrapperTop = heroWrapper.offsetTop;
+    _heroWrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
+  }
+
+  function prepareSignature(svgDoc) {
+    const svg = svgDoc.querySelector('svg');
+    if (!svg) return;
+
+    const ink = '#000000';
+
+    const originalPaths = Array.from(svg.querySelectorAll('path'))
+      .filter(p => typeof p.getTotalLength === 'function');
+
+    if (!originalPaths.length) return;
+
+    // Reset
+    signatureMaskPaths = [];
+    signatureLengths = [];
+    signatureTotalLength = 0;
+    signaturePen = null;
+
+    // Forziamo versione "fill" (piena) con maschera di reveal
+    const gFill = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'g');
+    gFill.setAttribute('id', 'sigFill');
+
+    originalPaths.forEach(p => {
+      p.style.fill = ink;
+      p.style.stroke = 'none';
+      gFill.appendChild(p);
+    });
+    svg.appendChild(gFill);
+
+    let defs = svg.querySelector('defs');
+    if (!defs) {
+      defs = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'defs');
+      svg.insertBefore(defs, svg.firstChild);
     }
 
-    const heroSection = document.querySelector('.hero');
-    const heroWrapper = document.querySelector('.hero-wrapper');
-    const heroImg = document.querySelector('.hero-img');
+    const mask = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'mask');
+    mask.setAttribute('id', 'sigRevealMask');
 
-    const slogan = document.getElementById('elegant-slogan');
+    const rect = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', '0');
+    rect.setAttribute('y', '0');
+    rect.setAttribute('width', '100%');
+    rect.setAttribute('height', '100%');
+    rect.setAttribute('fill', 'black');
+    mask.appendChild(rect);
 
-    const mqNarrow = window.matchMedia('(max-width: 800px)');
+    const MIN_LEN = 25;
 
+    const tmp = originalPaths.map((src) => {
+      const p = src.cloneNode(true);
+      p.style.fill = 'none';
+      p.style.stroke = 'white';
+      p.style.strokeLinecap = 'round';
+      p.style.strokeLinejoin = 'round';
+      p.style.strokeWidth = '30';
 
+      const len = p.getTotalLength();
+      p.style.strokeDasharray = String(len);
+      p.style.strokeDashoffset = String(len);
 
-    /* FIRMA CENTRALE NELLA HERO */
-    const signatureLayer = document.querySelector('.hero-signature-layer');
-    const signatureEmbed = document.getElementById('firma-isa-hero');
-    const signatureWrapper = document.querySelector('.hero-signature-wrapper');
+      let s = {x: 0, y: 0}, e = {x: 0, y: 0};
+      try { s = p.getPointAtLength(0); } catch (e2) {}
+      try { e = p.getPointAtLength(len); } catch (e2) {}
 
-    let signaturePen = null;
-    let signatureMaskPaths = [];
-    let signatureLengths = [];
-    let signatureTotalLength = 0;
-    let signatureReady = false;
+      return { p, len, sx: s.x, sy: s.y, ex: e.x, ey: e.y };
+    }).filter(o => o.len >= MIN_LEN);
 
-    function prepareSignature(svgDoc) {
-      const svg = svgDoc.querySelector('svg');
-      if (!svg) return;
+    tmp.sort((a,b) => a.sx - b.sx);
 
-      const ink = '#000000';
+    const ordered = [];
+    let cur = tmp.shift();
+    if (cur) ordered.push(cur);
+    let cx = cur ? cur.ex : 0, cy = cur ? cur.ey : 0;
 
-      const originalPaths = Array.from(svg.querySelectorAll('path'))
-        .filter(p => typeof p.getTotalLength === 'function');
-
-      if (!originalPaths.length) return;
-
-      const isStrokeBased = originalPaths.some(p => {
-        const f = (p.getAttribute('fill') || '').trim().toLowerCase();
-        const s = (p.getAttribute('stroke') || '').trim().toLowerCase();
-        return (f === 'none' || f === '') && s !== '' && s !== 'none';
-      });
-
-      signatureMaskPaths = [];
-      signatureLengths = [];
-      signatureTotalLength = 0;
-      signaturePen = null;
-
-      if (isStrokeBased) {
-        // Nota: anche se l'SVG è basato su stroke, forziamo la versione "piena" (fill)
-        // usando la maschera qui sotto, per evitare l'effetto "solo contorni".
+    while (tmp.length) {
+      let bestIdx = 0, bestD = Infinity;
+      for (let i = 0; i < tmp.length; i++) {
+        const dx = tmp[i].sx - cx;
+        const dy = tmp[i].sy - cy;
+        const d = dx*dx + dy*dy;
+        if (d < bestD) { bestD = d; bestIdx = i; }
       }
-
-      const gFill = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'g');
-      gFill.setAttribute('id', 'sigFill');
-
-      originalPaths.forEach(p => {
-        p.style.fill = ink;
-        p.style.stroke = 'none';
-        gFill.appendChild(p);
-      });
-      svg.appendChild(gFill);
-
-      let defs = svg.querySelector('defs');
-      if (!defs) {
-        defs = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'defs');
-        svg.insertBefore(defs, svg.firstChild);
-      }
-
-      const mask = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'mask');
-      mask.setAttribute('id', 'sigRevealMask');
-
-      const rect = svgDoc.createElementNS('http://www.w3.org/2000/svg', 'rect');
-      rect.setAttribute('x', '0');
-      rect.setAttribute('y', '0');
-      rect.setAttribute('width', '100%');
-      rect.setAttribute('height', '100%');
-      rect.setAttribute('fill', 'black');
-      mask.appendChild(rect);
-
-      const MIN_LEN = 25;
-
-      const tmp = originalPaths.map((src) => {
-        const p = src.cloneNode(true);
-        p.style.fill = 'none';
-        p.style.stroke = 'white';
-        p.style.strokeLinecap = 'round';
-        p.style.strokeLinejoin = 'round';
-        p.style.strokeWidth = '30';
-
-        const len = p.getTotalLength();
-        p.style.strokeDasharray = String(len);
-        p.style.strokeDashoffset = String(len);
-
-        let s = {x: 0, y: 0}, e = {x: 0, y: 0};
-        try { s = p.getPointAtLength(0); } catch (e2) {}
-        try { e = p.getPointAtLength(len); } catch (e2) {}
-
-        return { p, len, sx: s.x, sy: s.y, ex: e.x, ey: e.y };
-      }).filter(o => o.len >= MIN_LEN);
-
-      tmp.sort((a,b) => a.sx - b.sx);
-      const ordered = [];
-      let cur = tmp.shift();
-      if (cur) ordered.push(cur);
-      let cx = cur ? cur.ex : 0, cy = cur ? cur.ey : 0;
-
-      while (tmp.length) {
-        let bestIdx = 0, bestD = Infinity;
-        for (let i = 0; i < tmp.length; i++) {
-          const dx = tmp[i].sx - cx;
-          const dy = tmp[i].sy - cy;
-          const d = dx*dx + dy*dy;
-          if (d < bestD) { bestD = d; bestIdx = i; }
-        }
-        cur = tmp.splice(bestIdx, 1)[0];
-        ordered.push(cur);
-        cx = cur.ex; cy = cur.ey;
-      }
-
-      ordered.forEach(({ p, len }) => {
-        mask.appendChild(p);
-        signatureMaskPaths.push(p);
-        signatureLengths.push(len);
-        signatureTotalLength += len;
-      });
-
-      defs.appendChild(mask);
-      gFill.setAttribute('mask', 'url(#sigRevealMask)');
-
-      signatureReady = signatureMaskPaths.length > 0 && signatureTotalLength > 0;
+      cur = tmp.splice(bestIdx, 1)[0];
+      ordered.push(cur);
+      cx = cur.ex; cy = cur.ey;
     }
 
-    if (signatureEmbed && 'addEventListener' in signatureEmbed) {
-      signatureEmbed.addEventListener('load', () => {
-        const svgDoc = signatureEmbed.contentDocument;
-        if (!svgDoc) return;
-        prepareSignature(svgDoc);
-        handleHeroScroll();
-      });
-    }
+    ordered.forEach(({ p, len }) => {
+      mask.appendChild(p);
+      signatureMaskPaths.push(p);
+      signatureLengths.push(len);
+      signatureTotalLength += len;
+    });
 
-    let scrollConfig = {
-      hideTextAt: 0.15,
-      scaleFactor: 0.34,
-      translateMax: 120,
-      shrinkAt: 0.7,
-      sloganAt: 0.88,
-      signatureAt: 0.55,
-      signatureFullAt: 0.95
+    defs.appendChild(mask);
+    gFill.setAttribute('mask', 'url(#sigRevealMask)');
+
+    signatureReady = signatureMaskPaths.length > 0 && signatureTotalLength > 0;
+  }
+
+  if (signatureEmbed && 'addEventListener' in signatureEmbed) {
+    signatureEmbed.addEventListener('load', () => {
+      const svgDoc = signatureEmbed.contentDocument;
+      if (!svgDoc) return;
+      prepareSignature(svgDoc);
+      updateHeroMetrics();
+      handleHeroScroll();
+    });
+  }
+
+  let scrollConfig = {
+    hideTextAt: 0.15,
+    scaleFactor: 0.34,
+    translateMax: 120,
+    shrinkAt: 0.7,
+    sloganAt: 0.88,
+    signatureAt: 0.55,
+    signatureFullAt: 0.95
+  };
+
+  function updateScrollConfig() {
+    const narrow = mqNarrow.matches;
+    scrollConfig = {
+      hideTextAt: narrow ? 0.12 : 0.15,
+      scaleFactor: narrow ? 0.25 : 0.34,
+      translateMax: narrow ? 80 : 120,
+      shrinkAt: narrow ? 0.6 : 0.7,
+      sloganAt: narrow ? 0.82 : 0.88,
+      signatureAt: narrow ? 0.50 : 0.55,
+      signatureFullAt: narrow ? 0.90 : 0.95
     };
-
-    function updateScrollConfig() {
-      const narrow = mqNarrow.matches;
-      scrollConfig = {
-        hideTextAt: narrow ? 0.12 : 0.15,
-        scaleFactor: narrow ? 0.25 : 0.34,
-        translateMax: narrow ? 80 : 120,
-        shrinkAt: narrow ? 0.6 : 0.7,
-        sloganAt: narrow ? 0.82 : 0.88,
-        signatureAt: narrow ? 0.50 : 0.55,
-        signatureFullAt: narrow ? 0.90 : 0.95
-      };
-    }
+  }
+  updateScrollConfig();
+  mqNarrow.addEventListener('change', () => {
     updateScrollConfig();
-    mqNarrow.addEventListener('change', updateScrollConfig);
+    updateHeroMetrics();
+    _onHeroScroll();
+  });
 
-    function handleHeroScroll() {
-      if (!heroSection || !heroWrapper) return;
+  function handleHeroScroll() {
+    if (!heroSection || !heroWrapper) return;
 
-      const wrapperHeight = heroWrapper.offsetHeight - window.innerHeight;
-      const wrapperTop = heroWrapper.offsetTop;
-      const scrolled = window.scrollY - wrapperTop;
+    const wrapperHeight = _heroWrapperHeight;
+    const wrapperTop    = _heroWrapperTop;
+    const scrolled      = window.scrollY - wrapperTop;
 
-      const progress = Math.min(1, Math.max(0, wrapperHeight > 0 ? scrolled / wrapperHeight : 0));
+    const progress = Math.min(1, Math.max(0, wrapperHeight > 0 ? scrolled / wrapperHeight : 0));
 
-      heroSection.classList.toggle('hide-text', progress > scrollConfig.hideTextAt);
+    heroSection.classList.toggle('hide-text', progress > scrollConfig.hideTextAt);
 
-      const scale = 1 - progress * scrollConfig.scaleFactor;
-      const translateY = progress * scrollConfig.translateMax;
-      if (heroImg) heroImg.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+    const scale = 1 - progress * scrollConfig.scaleFactor;
+    const translateY = progress * scrollConfig.translateMax;
 
-      const sigMult = 1; // la firma NON deve scalare come la hero
-      if (signatureWrapper) {
-        if (mqNarrow.matches) {
-          // mobile: non farla "scendere/scalare" insieme alla foto (causa tagli)
-          signatureWrapper.style.transform = 'none';
-        } else {
-          signatureWrapper.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale * sigMult})`;
-        }
+    if (heroImg) {
+      heroImg.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+    }
+
+    if (signatureWrapper) {
+      if (mqNarrow.matches) {
+        signatureWrapper.style.transform = 'none';
+      } else {
+        signatureWrapper.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
       }
+    }
 
+    heroSection.classList.toggle('shrink', progress > scrollConfig.shrinkAt);
 
-      heroSection.classList.toggle('shrink', progress > scrollConfig.shrinkAt);
+    /* FIRMA: evita scatti (mobile) */
+    if (signatureLayer && signatureEmbed) {
+      if (progress > scrollConfig.signatureAt) {
+        heroSection.classList.add('show-signature');
+        sigWasVisible = true;
 
-      if (signatureLayer && signatureEmbed) {
-        if (progress > scrollConfig.signatureAt) {
-          heroSection.classList.add('show-signature');
+        let localP = Math.min(
+          1,
+          (progress - scrollConfig.signatureAt) /
+          (scrollConfig.signatureFullAt - scrollConfig.signatureAt || 0.0001)
+        );
+        if (localP < 0) localP = 0;
 
-          let localP = Math.min(1, (progress - scrollConfig.signatureAt) / (scrollConfig.signatureFullAt - scrollConfig.signatureAt || 0.0001));
-          if (localP < 0) localP = 0;
+        signatureEmbed.style.transform = 'rotate(-4deg)';
+        signatureEmbed.style.opacity = 1;
 
-          const sigScale = 0.9 + localP * 0.15;
-          const rotate = -3 + localP * 6;
-          signatureEmbed.style.transform = 'rotate(-4deg)';
-          signatureEmbed.style.opacity = 1;
+        if (signatureReady) {
+          // quantizzazione = molti meno write ai path -> molto più fluido su mobile
+          const steps = mqNarrow.matches ? 40 : 80;
+          const step = Math.floor(localP * steps);
 
-          if (signatureReady) {
+          if (step !== sigLastStep) {
+            sigLastStep = step;
+
             const eased = localP * localP * (3 - 2 * localP);
             let drawLength = signatureTotalLength * eased;
 
-            signatureMaskPaths.forEach((path, i) => {
-              const len = signatureLengths[i];
+            for (let i = 0; i < signatureMaskPaths.length; i++) {
+              const path = signatureMaskPaths[i];
+              const len  = signatureLengths[i];
+
               if (drawLength >= len) {
                 path.style.strokeDashoffset = "0";
                 drawLength -= len;
@@ -1345,67 +1597,111 @@
                 path.style.strokeDashoffset = String(len - drawLength);
                 drawLength = 0;
               }
-            });
-          }
-        } else {
-          heroSection.classList.remove('show-signature');
-          signatureEmbed.style.transform = 'rotate(0deg)';
-          signatureEmbed.style.opacity = 0;
-
-          if (signatureReady) {
-            signatureMaskPaths.forEach((path, i) => path.style.strokeDashoffset = String(signatureLengths[i]));
+            }
           }
         }
-      }
+      } else {
+        heroSection.classList.remove('show-signature');
+        signatureEmbed.style.transform = 'rotate(0deg)';
+        signatureEmbed.style.opacity = 0;
 
-      /* Marquee: compare mentre la hero si rimpicciolisce (sincronizzato con la firma)
-         e, quando la foto ha quasi finito di rimpicciolirsi, si posiziona appena sopra la foto (non dietro). */
-      if (marqueeEl) {
-        const startAt = scrollConfig.shrinkAt;
-        const endAt   = scrollConfig.signatureFullAt;
-        let mp = (progress - startAt) / (endAt - startAt || 0.0001);
-        mp = Math.min(1, Math.max(0, mp));
-        marqueeEl.style.setProperty('--marqueeOpacity', String(mp));
-
-        // solo nella parte finale: posiziona la scritta subito sopra la “card” dell’immagine
-        if (mp > 0.92 && heroImg) {
-          const imgRect  = heroImg.getBoundingClientRect();
-          const heroRect = heroSection.getBoundingClientRect();
-          const gap = mqNarrow.matches ? 10 : 16;
-          const desiredTop = (imgRect.top - heroRect.top) - marqueeEl.offsetHeight - gap;
-          marqueeEl.style.top = `${Math.max(12, desiredTop)}px`;
-        } else {
-          // durante la transizione resta più in alto (valore CSS)
-          marqueeEl.style.top = '';
-        }
-      }
-
-      if (slogan) {
-        if (progress > scrollConfig.sloganAt) {
-          slogan.classList.add('show');
-        } else {
-          slogan.classList.remove('show');
+        // reset UNA sola volta (non a ogni frame)
+        if (signatureReady && sigWasVisible) {
+          sigWasVisible = false;
+          sigLastStep = -1;
+          for (let i = 0; i < signatureMaskPaths.length; i++) {
+            signatureMaskPaths[i].style.strokeDashoffset = String(signatureLengths[i]);
+          }
         }
       }
     }
 
-    let _heroTicking = false;
-    function _onHeroScroll() {
-      if (_heroTicking) return;
-      _heroTicking = true;
-      requestAnimationFrame(() => {
-        _heroTicking = false;
-        handleHeroScroll();
-      });
+    /* MARQUEE: su mobile NON fare getBoundingClientRect (scatta) */
+    if (marqueeEl) {
+      const startAt = scrollConfig.shrinkAt;
+      const endAt   = scrollConfig.signatureFullAt;
+      let mp = (progress - startAt) / (endAt - startAt || 0.0001);
+      mp = Math.min(1, Math.max(0, mp));
+      marqueeEl.style.setProperty('--marqueeOpacity', String(mp));
+
+      // Solo desktop: posizionamento dinamico (mobile = lascia CSS)
+      if (!mqNarrow.matches && mp > 0.92 && heroImg) {
+        const imgRect  = heroImg.getBoundingClientRect();
+        const heroRect = heroSection.getBoundingClientRect();
+        const gap = 16;
+        const desiredTop = (imgRect.top - heroRect.top) - marqueeEl.offsetHeight - gap;
+        marqueeEl.style.top = `${Math.max(12, desiredTop)}px`;
+      } else {
+        marqueeEl.style.top = '';
+      }
     }
 
-    window.addEventListener('scroll', _onHeroScroll, { passive: true });
-    window.addEventListener('resize', _onHeroScroll);
-document.addEventListener('DOMContentLoaded', () => {
-      const yearSpan = document.getElementById('year');
-      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    /* SLOGAN */
+    if (slogan) {
+      if (progress > scrollConfig.sloganAt) slogan.classList.add('show');
+      else slogan.classList.remove('show');
+    }
+  }
+
+  let _heroTicking = false;
+  function _onHeroScroll() {
+    if (_heroTicking) return;
+    _heroTicking = true;
+    requestAnimationFrame(() => {
+      _heroTicking = false;
       handleHeroScroll();
     });
+  }
+
+  window.addEventListener('scroll', _onHeroScroll, { passive: true });
+
+  window.addEventListener('resize', () => {
+    updateHeroMetrics();
+    _onHeroScroll();
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    updateHeroMetrics();
+    handleHeroScroll();
+  });
+
+
+
+    /* === REVEAL CHI SONO (una volta sola) === */
+    (() => {
+      const els = document.querySelectorAll('#chi-sono .reveal-left, #chi-sono .reveal-right');
+      if (!els.length) return;
+
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            obs.unobserve(e.target); // UNA SOLA VOLTA
+          }
+        });
+      }, { threshold: 0.25 });
+
+      els.forEach(el => io.observe(el));
+    })();
+    /* === "LEGGI ALTRO" nei servizi === */
+    (() => {
+      const buttons = document.querySelectorAll('#assistenza .btn-more');
+      if (!buttons.length) return;
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.service-card');
+          if (!card) return;
+
+          const open = card.classList.toggle('is-open');
+          btn.textContent = open ? 'Leggi meno' : 'Leggi altro';
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+    })();
+
   </script>
 
     <!-- HORIZONTAL TIMELINE -->
